@@ -8,9 +8,10 @@ Au vu de la faible quantité de données à traiter, nous ne nous sommes pas sou
 Recettes : liste d'objets JSON, de la forme :
 
 			nom : string,
-	    ingrédients : list of strings,
-			tps_cuisson : int,
-			tps_preparation : int,
+	    ingrédients : list of strings, (un ingrédient n'est représenté que par une string, ex " 4oeufs")
+			tps_cuisson : int, (en minutes)
+			tps_preparation : int, (en minutes)
+			nombre_personnes: int
 			source: string (à priori, nous n'en aurons pas besoin, mais nous ne pouvons pas en être sûrs)
 			(éventuellement, autres métadonnées)
 			étapes : liste d'objets JSON, de la forme :
