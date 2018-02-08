@@ -116,4 +116,85 @@
 		]
 	},
 
+	{ "nom": "Brookie",
+	  "ingredients":
+			["Pour le brownie",
+			"100 g de chocolat noir /noisette",
+    	"60 g de beurre de cacahuètes",
+    	"80 g de sucre",
+    	"2 oeufs",
+    	"80 g de farine",
+    	"50 g de noix ou noisettes concassées",
+
+			"Pour le cookie",
+    	"100 g de beurre salé ( ou ajouter gros sel )",
+    	"80 g de sucre cassonade",
+			"1 oeuf",
+    	"150 g de farine",
+    	"2 cuillères à café de levure",
+    	"50 g de chocolat "],
+	  "tps_cuisson": "25",
+	  "tps_preparation": "15",
+		"nombre_personnes":"4",
+		"source":"http://www.marmiton.org/recettes/recette_brookies_221631.aspx",
+	  "etapes":[
+
+			{"identifiant" :"1",
+			"descriprion_courte" : "Préchauffer le four à 180° (thermostat 6)",
+			"descriprion_longue" : "Préchauffer le four à 180° (thermostat 6)",
+			"enfants" : [],
+			"lieu" : "four"},
+
+			{"identifiant" :"2",
+			"descriprion_courte" : "Faire fondre le chocolat, y ajouter le beurre de cacahuète",
+			"descriprion_longue" : "Faire fondre le chocolat, y ajouter le beurre de cacahuète",
+			"enfants" : [],
+			"lieu" : "plaque de cuisson 1"},
+
+			{"identifiant" :"3",
+			"descriprion_courte" : "Saupoudrer de sucre, casser les oeufs et bien mélanger",
+			"descriprion_longue" : "Saupoudrer de sucre, casser les oeufs et bien mélanger",
+			"enfants" : ["2"],
+			"lieu" : "plaque de cuisson 1"},
+
+			{"identifiant" :"4",
+			"descriprion_courte" : "Finir par la farine et les noix. ",
+			"descriprion_longue" : "Finir par la farine et les noix. ",
+			"enfants" : ["3"],
+			"lieu" : "plaque de cuisson 1"},
+
+			{"identifiant" :"5",
+			"descriprion_courte" : "Étaler cette préparation dans un fond de moule",
+			"descriprion_longue" : "Étaler cette préparation dans un fond de moule",
+			"enfants" : ["4"],
+			"lieu" : "plan de travail 1"},
+
+			{"identifiant" :"6",
+			"descriprion_courte" : "Mélanger à la main le beurre mou au sucre, y ajouter l’oeuf, bien mélanger",
+			"descriprion_longue" : "Mélanger à la main le beurre mou au sucre, y ajouter l’oeuf, bien mélanger",
+			"enfants" : [],
+			"lieu" : "plan de travail 2"},
+
+			{"identifiant" :"7",
+			"descriprion_courte" : "Saupoudrer de farine et de levure, ajouter les pépites",
+			"descriprion_longue" : "Saupoudrer de farine et de levure, ajouter les pépites",
+			"enfants" : [],
+			"lieu" : "plan de travail 2"},
+
+			{"identifiant" :"8",
+			"descriprion_courte" : "Recouvrir le brownie de cookie et enfourner à 180°C environ 25 min",
+			"descriprion_longue" : "Recouvrir le brownie de cookie et enfourner à 180°C environ 25 min",
+			"enfants" : ["1","5","7"],
+			"lieu" : "four"},
+
+			{"identifiant" :"9",
+			"descriprion_courte" : "Attendre que le gâteau ait refroidi pour le découper en petit cubes",
+			"descriprion_longue" : "Attendre que le gâteau ait refroidi pour le découper en petit cubes",
+			"enfants" : ["8"],
+			"lieu" : "plan de travail 1"},
+
+		]
+	},
+
+
 ]}
