@@ -1,55 +1,56 @@
 {"recettes":[
 	{ "nom": "tarte aux pommes",
-	  "ingredients": 
-		[ "1 p‚te brisÈe",
+	  "ingredients":
+		[ "1 p√©te bris√©e",
 		  "6 pommes",
-		  "1 sachet de sucre vanillÈ",
+		  "1 sachet de sucre vanill√©",
 		  "30 g de beurre"],
 	  "tps_cuisson": "30",
 	  "tps_preparation": "25",
-	  "etapes": 
+	  "etapes":
 	      [{"identifiant" :"1",
-		"descriprion_courte" : "Èplucher et dÈcouper 4 pommes",
-		"descriprion_longue" : "Èplucher et dÈcouper 4 pommes",
+		"descriprion_courte" : "√©plucher et d√©couper 4 pommes",
+		"descriprion_longue" : "√©plucher et d√©couper 4 pommes",
 		"enfants" : [],
 		"lieu" : "plan de travail 1"},
 
 		{"identifiant" :"2",
 		"descriprion_courte" : "Faire une compote",
-		"descriprion_longue" : "Mettre les pommes dans une casserole avec un peu d'eau (1 verre ou 2). Bien remuer. Quand les pommes commencent ‡ ramollir, ajouter un sachet ou un sachet et demi de sucre vanillÈ. Ajouter un peu d'eau si nÈcessaire. Vous saurez si la compote est prÍte une fois que les pommes ne seront plus dures du tout. Ce n'est pas grave s'il reste quelques morceaux. Laisser refroidir.",
+		"descriprion_longue" : "Mettre les pommes dans une casserole avec un peu d'eau (1 verre ou 2). Bien remuer. Quand les pommes commencent √© ramollir, ajouter un sachet ou un sachet et demi de sucre vanill√©. Ajouter un peu d'eau si n√©cessaire. Vous saurez si la compote est pr√©te une fois que les pommes ne seront plus dures du tout. Ce n'est pas grave s'il reste quelques morceaux. Laisser refroidir.",
 		"enfants" : ["1"],
 		"lieu" : "plaque de cuisson 1"},
 
 		{"identifiant" :"3",
-		"descriprion_courte" : "Èplucher et dÈcouper les autres pommes en lamelles",
-		"descriprion_longue" : "Èplucher et dÈcouper les autres pommes en lamelles",
+		"descriprion_courte" : "√©plucher et d√©couper les autres pommes en lamelles",
+		"descriprion_longue" : "√©plucher et d√©couper les autres pommes en lamelles",
 		"enfants" : [],
 		"lieu" : "plan de travail 2"},
 
 		{"identifiant" :"4",
-		"descriprion_courte" : "PrÈchauffer le four",
-		"descriprion_longue" : "PrÈchauffer le four ‡ 210∞C (thermostat 7)",
+		"descriprion_courte" : "Pr√©chauffer le four",
+		"descriprion_longue" : "Pr√©chauffer le four √© 210√©C (thermostat 7)",
 		"enfants" : [],
 		"lieu" : "four"},
 
 		{"identifiant" :"5",
-		"descriprion_courte" : "PrÈparer la p‚te",
-		"descriprion_longue" : "Etaler la p‚te brisÈe dans un moule et la piquer avec une fourchette",
+		"descriprion_courte" : "Pr√©parer la p√©te",
+		"descriprion_longue" : "Etaler la p√©te bris√©e dans un moule et la piquer avec une fourchette",
 		"enfants" : [],
 		"lieu" : "plan de travail 3"},
 
 		{"identifiant" :"6",
-		"descriprion_courte" : "erser la compote sur la p‚te, et les lamelles sur la compote",
-		"descriprion_longue" : "Verser la compote sur la p‚te et placer les lamelles de pommes en formant une spirale ou plusieurs cercles, au choix ! Disposer des lamelles de beurre dessus",
+		"descriprion_courte" : "erser la compote sur la p√©te, et les lamelles sur la compote",
+		"descriprion_longue" : "Verser la compote sur la p√©te et placer les lamelles de pommes en formant une spirale ou plusieurs cercles, au choix ! Disposer des lamelles de beurre dessus",
 		"enfants" : ["2","3","5"],
 		"lieu" : "plan de travail 3"},
 
 		{"identifiant" :"7",
 		"descriprion_courte" : "Mettre au four (30 min)",
-		"descriprion_longue" : "Mettre au four et laisser cuire pendant 30 min max. Surveiller la cuisson. Vous pouvez ajouter un peu de sucre vanillÈ sur la tarte pendant que Á‡ cuit pour caramÈliser un peu.",
+		"descriprion_longue" : "Mettre au four et laisser cuire pendant 30 min max. Surveiller la cuisson. Vous pouvez ajouter un peu de sucre vanill√© sur la tarte pendant que √©√© cuit pour caram√©liser un peu.",
 		"enfants" : ["4","6"],
 		"lieu" : "four"}
 		]
-	}
-]
-}
+	},
+	
+
+]}
