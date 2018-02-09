@@ -111,8 +111,7 @@
 			"descriprion_courte" : "Mettre le tout au four pendant 20 minutes",
 			"descriprion_longue" : "Mettre le tout au four pendant 20 minutes, le dessus doit être doré et dur comme une omelette",
 			"enfants" : ["6"],
-			"lieu" : "four"},
-
+			"lieu" : "four"}
 		]
 	},
 
@@ -135,8 +134,8 @@
     	"50 g de chocolat "],
 	  "tps_cuisson": "25",
 	  "tps_preparation": "15",
-		"nombre_personnes":"4",
-		"source":"http://www.marmiton.org/recettes/recette_brookies_221631.aspx",
+	  "nombre_personnes":"4",
+	  "source":"http://www.marmiton.org/recettes/recette_brookies_221631.aspx",
 	  "etapes":[
 
 			{"identifiant" :"1",
@@ -191,10 +190,10 @@
 			"descriprion_courte" : "Attendre que le gâteau ait refroidi pour le découper en petit cubes",
 			"descriprion_longue" : "Attendre que le gâteau ait refroidi pour le découper en petit cubes",
 			"enfants" : ["8"],
-			"lieu" : "plan de travail 1"},
+			"lieu" : "plan de travail 1"}
 
 		]
-	},
+	}
 
 
 ]}

@@ -5,13 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Speedcooking</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet"> 
+  
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+
   </head>
   <body>  
-    <nav class="navbar navbar-dark bg-primary">
+    <nav id="nav" class="navbar navbar-dark bg-primary">
       <a class="navbar-brand" href="">SpeedCooking</a>
+      <select class="selectRecipes"></select>
     </nav>
-  
-    <h1>Hello, world!</h1>
+
+   
+
+    <svg></svg>
+    
+
+    <script>
+
+      var svg = d3.select("svg")
+        .attr("width", 900)
+        .attr("height", 400)
+        .style("border", "1px solid black")
+
+      svg.append("text")
+        .text("Speedcooking")
+        .attr("y", 200)
+        .attr("x", 120)
+        .attr("font-size", 12)
+        .attr("font-family", "Lora serif")
+
+      var recipe_chosen;
+      var data_recipe;
+
+
+      d3.json("recettes.json", function(json) {
+
+        console.log(json.recettes)
+
+
+
+
+
+        var select = d3.select("select")
+          .on("change", function(){
+            recipe_chosen = d3.select(".selectRecipes").node().value;
+            
+            // Put info with selected information.
+            for (var i = 0; i< json.recettes.length; i++){
+              if (json.recettes[i].nom == recipe_chosen) {
+                data_recipe = json.recettes[i]
+              }
+            }
+
+            svg.select("text").data([data_recipe])
+              .text(function(d){
+                return "Recette issue de " + d.source
+              })
+
+
+              
+          })
+
+        select.selectAll("option").data(json.recettes).enter()
+          .append("option")
+          .attr("value", function(d) {return d.nom})
+          .html(function(d) {return d.nom})
+
+
+        svg.select("text").data(json.recettes)
+          .text(function(d){ return "Recette issue de " + d.source})
+
+
+      })
+
+     
+
+    </script>
+    
 
   </body>
 </html>
