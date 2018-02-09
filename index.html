@@ -5,22 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Speedcooking</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet"> 
-  
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+
     <script src="https://d3js.org/d3.v4.min.js"></script>
 
 
   </head>
-  <body>  
+  <body>
     <nav id="nav" class="navbar navbar-dark bg-primary">
       <a class="navbar-brand" href="">SpeedCooking</a>
       <select class="selectRecipes"></select>
     </nav>
 
-   
+
 
     <svg></svg>
-    
+
 
     <script>
 
@@ -44,14 +44,13 @@
 
         console.log(json.recettes)
 
-
-
-
+        var data_recipe = json.recettes[0];
+          // on en aura besoin avant de changer le form
 
         var select = d3.select("select")
           .on("change", function(){
             recipe_chosen = d3.select(".selectRecipes").node().value;
-            
+
             // Put info with selected information.
             for (var i = 0; i< json.recettes.length; i++){
               if (json.recettes[i].nom == recipe_chosen) {
@@ -63,9 +62,6 @@
               .text(function(d){
                 return "Recette issue de " + d.source
               })
-
-
-              
           })
 
         select.selectAll("option").data(json.recettes).enter()
@@ -78,12 +74,35 @@
           .text(function(d){ return "Recette issue de " + d.source})
 
 
+        // ajout des valeurs en x et y
+
+        // x : calcul de profondeur
+        var get_depth = function (i,etapes){
+          d = 1;
+          console.log("call withb i=");
+          console.log(i);
+          var children = etapes[i].enfants;
+          children.forEach(function (c) {
+            d_c = get_depth(c,etapes);
+            if (d_c+1 > d) {
+              d = d_c+1;
+            }
+          });
+          console.log("return :");
+          console.log(d);
+          return d;
+        };
+        depth = get_depth(data_recipe.etapes.length-1,data_recipe.etapes);
+
+
+        console.log(depth);
+
       })
 
-     
+
 
     </script>
-    
+
 
   </body>
 </html>

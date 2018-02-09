@@ -21,7 +21,7 @@ Recettes : liste d'objets JSON, de la forme :
 				descriprion_longue : string  (à afficher sur mouseOver)
 				enfants : list of ints (les indices des enfants)
         parent : int
-        type : "ajout"|"decoupe"|"cuisson_plaque"|"cuisson_four"|"patienter"|"autre"
+        type : "ajout"|"merge"|"decoupe"|"cuisson_plaque"|"cuisson_four"|"patienter"|"autre"
 				lieu : string (ex #: 'four','saladier_2', ...)
 
 Remarque : Il n'y a pas d'entiers à proprement parler en JSON,  "int" signifie seulement que l'on pourra directement convertir la donnée en entier depuis le Javascript.
