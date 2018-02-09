@@ -136,16 +136,10 @@
 			{"identifiant" :"6",
 			"descriprion_courte" : "Mettre le tout au four pendant 20 minutes",
 			"descriprion_longue" : "Mettre le tout au four pendant 20 minutes, le dessus doit être doré et dur comme une omelette",
-<<<<<<< HEAD
 			"enfants" : ["5"],
 			"parent":"-1",
 			"type":"cuisson_four",
-			"lieu" : "four"},
-
-=======
-			"enfants" : ["6"],
 			"lieu" : "four"}
->>>>>>> ef76640cc0d828fb6648dd4f26bbc29e3cd47cb9
 		]
 	},
 
