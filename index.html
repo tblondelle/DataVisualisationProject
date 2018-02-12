@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet"> 
   
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="./d3.v4.min.js"></script>
     <script src="https://d3js.org/d3-color.v1.min.js"></script>
     <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
@@ -14,16 +15,16 @@
 
 
   </head>
-  <body>  
+  <body>
     <nav id="nav" class="navbar navbar-dark bg-primary">
       <a class="navbar-brand" href="">SpeedCooking</a>
       <select class="selectRecipes"></select>
     </nav>
 
-   
+
 
     <svg></svg>
-    
+
 
     <script>
 
@@ -48,18 +49,17 @@
       var recipe_chosen;
       var data_recipe;
 
-
       var color = d3.scaleOrdinal(d3.schemePastel1);
-
 
       d3.json("recettes.json", function(json) {
 
-        data_recipe = json.recettes[0]
+        var data_recipe = json.recettes[0];
+        // on en aura besoin avant de changer le form
 
         // Load the recipe chosen in the variable data_recipe.
         select.on("change", function(){
             recipe_chosen = d3.select(".selectRecipes").node().value;
-            
+
             // Put info with selected information.
             for (var i = 0; i< json.recettes.length; i++){
               if (json.recettes[i].nom == recipe_chosen) {
@@ -81,9 +81,36 @@
 
 
 
-
         svg.select("text").data(json.recettes)
           .text(function(d){ return "Recette issue de " + d.source})
+
+
+        // ajout des valeurs en x et y
+
+        // x : calcul de profondeur
+        /*var get_depth = function (i,etapes){
+          d = 1;
+          console.log("call withb i=");
+          console.log(i);
+          var children = etapes[i].enfants;
+          children.forEach(function (c) {
+            d_c = get_depth(c,etapes);
+            if (d_c+1 > d) {
+              d = d_c+1;
+            }
+          });
+          console.log("return :");
+          console.log(d);
+          return d;
+        };
+        depth = get_depth(data_recipe.etapes.length-1,data_recipe.etapes);
+
+
+        console.log(depth);*/
+
+
+
+
 
 
         margins = {top: "30", right: "20", left: "20", bottom: "20"}
@@ -101,7 +128,6 @@
         locations_obj.sort(function(a, b) {
           return a.id - b.id;
         });
-
 
         var heigth_rect = (height - margins.top - margins.bottom) / locations_obj.length;
 
@@ -162,7 +188,7 @@
 
       })
     </script>
-    
+
 
   </body>
 </html>
