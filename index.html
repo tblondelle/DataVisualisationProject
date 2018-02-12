@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet"> 
   
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="./d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>
+    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
 
   </head>
@@ -24,10 +27,16 @@
 
     <script>
 
+      var width = 900, 
+          height = 400
+
+
       var svg = d3.select("svg")
-        .attr("width", 900)
-        .attr("height", 400)
+        .attr("width", width)
+        .attr("height", height)
         .style("border", "1px solid black")
+
+      var select = d3.select("select");
 
       svg.append("text")
         .text("Speedcooking")
@@ -40,16 +49,15 @@
       var data_recipe;
 
 
+      var color = d3.scaleOrdinal(d3.schemePastel1);
+
+
       d3.json("recettes.json", function(json) {
 
-        console.log(json.recettes)
+        data_recipe = json.recettes[0]
 
-
-
-
-
-        var select = d3.select("select")
-          .on("change", function(){
+        // Load the recipe chosen in the variable data_recipe.
+        select.on("change", function(){
             recipe_chosen = d3.select(".selectRecipes").node().value;
             
             // Put info with selected information.
@@ -63,25 +71,96 @@
               .text(function(d){
                 return "Recette issue de " + d.source
               })
-
-
-              
           })
 
+        // Add all recipe chosen in the dropdown.
         select.selectAll("option").data(json.recettes).enter()
           .append("option")
           .attr("value", function(d) {return d.nom})
           .html(function(d) {return d.nom})
 
 
+
+
         svg.select("text").data(json.recettes)
           .text(function(d){ return "Recette issue de " + d.source})
 
 
+        margins = {top: "30", right: "20", left: "20", bottom: "20"}
+        margin_inter_rect = 3;
+
+        var locations_obj = [{lieu: "plan de travail 1", id: 1},
+        {lieu: "plaque de cuisson 1", id: 2},
+        {lieu: "plan de travail 2", id: 3},
+        {lieu: "four", id: 4},
+        {lieu: "plan de travail 3", id: 5}] 
+
+
+        
+
+        locations_obj.sort(function(a, b) {
+          return a.id - b.id;
+        });
+
+
+        var heigth_rect = (height - margins.top - margins.bottom) / locations_obj.length;
+
+        locations = svg.selectAll(".locations").data(locations_obj).enter()
+          .append("g")
+            .attr("class", "locations")
+            .attr("transform", function(d, i) {
+              var translateY = parseInt(margins.top) + i*(heigth_rect + margin_inter_rect); 
+              return "translate(" + margins.left + "," + translateY + ")"
+            })
+
+        locations.append("rect")
+          .attr("class", function(d){return d.lieu})
+          .attr("width", function(){return width - margins.right - margins.left})
+          .attr("height", function(d){return heigth_rect})
+          .attr("x", 0)
+          .attr("y", 0)
+          .attr("fill", function(d,i){return color(i)})
+
+        locations.append("text")
+          .attr("transform", function(d, i) { 
+            return "translate(3,18)"
+          })
+          .html(function(d){return d.lieu})
+
+
+        // Get all locations from data.
+        var all_locations = []
+        data_recipe.etapes.forEach(function(d,i){
+
+          var obj = {lieu: d.lieu, etapes:[]}
+
+          if (!all_locations.includes(obj)){
+            all_locations.push(obj)
+          }
+        })
+        
+
+
+        data_recipe.etapes.forEach(function(etape,i){
+          all_locations.forEach(function(location,j){
+            if (location.lieu === etape.lieu){
+              location.etapes.push(+etape.identifiant)
+            }
+          })
+        })
+
+
+
+
+        console.log(data_recipe)
+        console.log(all_locations)
+
+
+
+
+
+
       })
-
-     
-
     </script>
     
 

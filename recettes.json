@@ -7,7 +7,7 @@
 		  "30 g de beurre"],
 	  "tps_cuisson": "30",
 	  "tps_preparation": "25",
-		"nombre_personnes":"6",
+	  "nombre_personnes":"6",
 		"source":"http://www.marmiton.org/recettes/recette_tarte-aux-pommes_18588.aspx",
 	  "etapes":
 	      [{"identifiant" :"1",
