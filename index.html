@@ -13,6 +13,11 @@
     <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
+    <style>
+      svg {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
+    </style>
 
   </head>
   <body>
@@ -22,29 +27,27 @@
     </nav>
 
 
-
-    <svg></svg>
+    <div class="container">
+      <!-- Content here -->
+      <svg></svg>
+    </div>
 
 
     <script>
 
       var width = 900, 
-          height = 400
+          height = 500,
+          margins = {top: 30, right: 20, left: 20, bottom: 20, inter_rect: 0}
+          temp_internode_distance = 50,
+          padding_right = 30;
 
 
       var svg = d3.select("svg")
         .attr("width", width)
         .attr("height", height)
-        .style("border", "1px solid black")
 
       var select = d3.select("select");
 
-      svg.append("text")
-        .text("Speedcooking")
-        .attr("y", 200)
-        .attr("x", 120)
-        .attr("font-size", 12)
-        .attr("font-family", "Lora serif")
 
       var recipe_chosen;
       var data_recipe;
@@ -53,10 +56,12 @@
 
       d3.json("recettes.json", function(json) {
 
-        var data_recipe = json.recettes[0];
+        data_recipe = json.recettes[0];
         // on en aura besoin avant de changer le form
 
-        // Load the recipe chosen in the variable data_recipe.
+
+
+        // Load the recipe chosen in the LOCAL variable data_recipe.
         select.on("change", function(){
             recipe_chosen = d3.select(".selectRecipes").node().value;
 
@@ -66,12 +71,7 @@
                 data_recipe = json.recettes[i]
               }
             }
-
-            svg.select("text").data([data_recipe])
-              .text(function(d){
-                return "Recette issue de " + d.source
-              })
-          })
+        });
 
         // Add all recipe chosen in the dropdown.
         select.selectAll("option").data(json.recettes).enter()
@@ -80,9 +80,6 @@
           .html(function(d) {return d.nom})
 
 
-
-        svg.select("text").data(json.recettes)
-          .text(function(d){ return "Recette issue de " + d.source})
 
 
         // ajout des valeurs en x et y
@@ -113,8 +110,7 @@
 
 
 
-        margins = {top: "30", right: "20", left: "20", bottom: "20"}
-        margin_inter_rect = 3;
+      
 
         var locations_obj = [{lieu: "plan de travail 1", id: 1},
         {lieu: "plaque de cuisson 1", id: 2},
@@ -122,20 +118,20 @@
         {lieu: "four", id: 4},
         {lieu: "plan de travail 3", id: 5}] 
 
-
-        
-
         locations_obj.sort(function(a, b) {
           return a.id - b.id;
         });
 
+
+
+        // Create background for locations (four, plaque de travail 1, ...)
         var heigth_rect = (height - margins.top - margins.bottom) / locations_obj.length;
 
         locations = svg.selectAll(".locations").data(locations_obj).enter()
           .append("g")
             .attr("class", "locations")
             .attr("transform", function(d, i) {
-              var translateY = parseInt(margins.top) + i*(heigth_rect + margin_inter_rect); 
+              var translateY = parseInt(margins.top) + i*(heigth_rect + margins.inter_rect); 
               return "translate(" + margins.left + "," + translateY + ")"
             })
 
@@ -145,32 +141,42 @@
           .attr("height", function(d){return heigth_rect})
           .attr("x", 0)
           .attr("y", 0)
-          .attr("fill", function(d,i){return color(i)})
+          .attr("fill", function(d,i){
+            console.log(i%2)
+            if (i%2 !== 0){
+              return "#eee"
+            } else {
+              return "#bbb"
+            }
+          })
+          .style("opacity", 0.5)
 
         locations.append("text")
+          .style("font-weight", "bold") 
+          .attr("class", "location_title") 
           .attr("transform", function(d, i) { 
             return "translate(3,18)"
           })
-          .html(function(d){return d.lieu})
+          .html(function(d){return capitalize(d.lieu)})
 
 
-        // Get all locations from data.
+        // Store strings of locations in all_locations
         var all_locations = []
         data_recipe.etapes.forEach(function(d,i){
-
-          var obj = {lieu: d.lieu, etapes:[]}
-
-          if (!all_locations.includes(obj)){
-            all_locations.push(obj)
+          if (!all_locations.includes(d.lieu)){
+            all_locations.push(d.lieu)
           }
         })
         
-
+        // Add in location_obj the nodes classified.
+        locations_obj.forEach(function(location,j){
+            location.etapes = [];
+          })
 
         data_recipe.etapes.forEach(function(etape,i){
-          all_locations.forEach(function(location,j){
+          locations_obj.forEach(function(location,j){
             if (location.lieu === etape.lieu){
-              location.etapes.push(+etape.identifiant)
+              location.etapes.push(etape.identifiant)
             }
           })
         })
@@ -178,15 +184,51 @@
 
 
 
+        var nodes = svg.selectAll(".node").data(data_recipe.etapes).enter()
+          .append("g")
+          .attr("class", "node")
+          .attr("transform", function(d){
+
+            // Get the id of the y position of the node.
+            for (var ind = 0; ind < locations_obj.length; ind++){
+              if (locations_obj[ind].lieu === d.lieu){
+                var y_index = locations_obj[ind].id;
+              }
+            }
+            // Get the x position of the node in the grid 
+            //TODO
+            var x_index = 0
+
+            var x = margins.left + padding_right + temp_internode_distance * x_index;
+            var y = margins.top + (heigth_rect + margins.inter_rect) * (y_index - 1/2);
+            return "translate(" + x + "," + y + ")"
+          })
+        
+        nodes.append('rect')
+          .attr("width", "10")
+          .attr("height", "10")
+          .attr("fill", "red")
+          
+        nodes.append("text")
+          .html(function(d){
+            return d.identifiant + ": " + capitalize(d.description_courte)
+          })
+          
+
+
         console.log(data_recipe)
-        console.log(all_locations)
-
-
+        console.log(locations_obj)
 
 
 
 
       })
+
+
+
+    function capitalize(string) { 
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
     </script>
 
 
