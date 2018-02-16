@@ -71,7 +71,7 @@
       var data_recipe;
 
 
-      var selectedNode = -1; 
+      var selectedNode = -1;
 
 
       var tooltip = d3.select('body').append('div')
@@ -110,7 +110,17 @@
           children.forEach(function (c) {
             var xc = etapes[c].x + size_node/2;
             var yc = etapes[c].y;
-            addLine(xp,yp,xc,yc);
+            console.log(i,etapes[i].depth)
+            console.log(c,etapes[c].depth)
+            if (etapes[i].depth > etapes[c].depth+1){
+              var delta_depth = etapes[i].depth - etapes[c].depth;
+              var new_xc = (xc-xp)/delta_depth + xp;
+              addLine(xp,yp,new_xc,yc);
+              addLine(new_xc,yc,xc,yc); // ligne droite jusqu'au virage
+
+            } else {
+              addLine(xp,yp,xc,yc);
+            };
           });
         };
       };
@@ -160,7 +170,7 @@
 
       d3.json("recettes.json", function(json) {
 
-        data_recipe = json.recettes[0];
+        data_recipe = json.recettes[2];
         // on en aura besoin avant de changer le form
 
         // Load the recipe chosen in the LOCAL variable data_recipe.
@@ -349,14 +359,14 @@
             case 38: // haut
 
               break
-            case 39: // Droite.    
+            case 39: // Droite.
               if (selectedNode < data_recipe.etapes.length - 1){
                 selectedNode += 1
               } else {
                 selectedNode = -1
               }
               break
-            case 40: // Bas  
+            case 40: // Bas
               break
           }
           return selectedNode
@@ -368,7 +378,7 @@
           if (selectedNode === -1){
             // Do nothing
           } else {
-            // Remove old green node.  
+            // Remove old green node.
             nodes.selectAll("g#node_" + selectedNode + " > rect")
               .transition()
               .attr("fill", 'red')
@@ -382,7 +392,7 @@
             hideTooltip()
           }
 
-          selectedNode = getNextNode(selectedNode, d3.event.keyCode) 
+          selectedNode = getNextNode(selectedNode, d3.event.keyCode)
 
           if (selectedNode === -1){
             // Do nothing
@@ -391,11 +401,11 @@
               .transition()
               .attr("fill", 'green')
               .attr("transform", "translate(" + (-size_node) + "," + (-size_node) + ")")
-              
+
               .attr("width", size_node*2)
               .attr("height", size_node*2)
 
-            showTooltip(data_recipe.etapes[selectedNode].x - 50, data_recipe.etapes[selectedNode].y + 50)   
+            showTooltip(data_recipe.etapes[selectedNode].x - 50, data_recipe.etapes[selectedNode].y + 50)
           }
         })
 
