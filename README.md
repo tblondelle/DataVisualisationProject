@@ -6,7 +6,7 @@
 
 This project aims to represent an alternative way to understand recepis when cooking. The classic succession of steps, despite its indisputable simplicity, may not be the ultimate tool to master complex recipes processes.
 
-Our (project)[https://tblondelle.github.io/DataVisualisationProject/] solves this problem with a clear visualisation of the required tasks. It thus allows a quick parallelisation of the work.
+Our [project](https://tblondelle.github.io/DataVisualisationProject/) solves this problem with a clear visualisation of the required tasks. It thus allows a quick parallelisation of the work.
 
 
 ## Team members
