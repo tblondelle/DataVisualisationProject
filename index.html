@@ -19,6 +19,24 @@
       }
     </style>
 
+
+    <!-- Tooltip style -->
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        div.tooltip {
+            color: #222;
+            background-color: #fff;
+            padding: .5em;
+            text-shadow: #f5f5f5 0 1px 0;
+            border-radius: 2px;
+            opacity: 0.9;
+            position: absolute;
+        }
+    </style>
+
   </head>
   <body>
     <nav id="nav" class="navbar navbar-dark bg-primary">
@@ -41,6 +59,7 @@
           temp_internode_distance = 50,
           padding_right = 30;
 
+      var size_node = 10;
 
       var svg = d3.select("svg")
         .attr("width", width)
@@ -52,6 +71,11 @@
       var data_recipe;
 
 
+      var selectedNode = -1; 
+
+
+      var tooltip = d3.select('body').append('div')
+        .attr('class', 'hidden tooltip');
 
 
       function addLine(x1,y1,x2,y2){
@@ -65,14 +89,14 @@
         var y_int1 = y1;
         var x_int2 = x1*(1/3) + x2*(2/3);
         var y_int2 = y2;
-/*     x1     x_int1
+      /*     x1     x_int1
         x       x
 
                         x       x
                      x_int2     x2            */
         svg.append('path')
             .attr("d", bezierLine([[x1,y1],[x_int1,y_int1],[x_int2,y_int2],[x2,y2]]))
-            .attr("stroke", "red")
+            .attr("stroke", "black")
             .attr("stroke-width", 1)
             .attr("fill", "none");
       };
@@ -81,10 +105,10 @@
         // on suppose que les champs x et y sont déjà définis pour chaque étape
         for(var i=0; i< etapes.length; i++){
           var children = etapes[i].enfants;
-          var xp = etapes[i].x;
+          var xp = etapes[i].x - size_node/2;
           var yp = etapes[i].y;
           children.forEach(function (c) {
-            var xc = etapes[c].x;
+            var xc = etapes[c].x + size_node/2;
             var yc = etapes[c].y;
             addLine(xp,yp,xc,yc);
           });
@@ -93,15 +117,12 @@
 
       //Calcul de profondeur
       var set_and_get_depth = function (i,etapes){
-       d = 1;
-       var children = etapes[i].enfants;
-       var children_depths = []
-       var j = 0;
-       children.forEach(function (c) {
-         children_depths[j] = set_and_get_depth(c,etapes);
-         j++ ;
+       var children_depths = [];
+       etapes[i].enfants.forEach(function (c) {
+         children_depths.push(set_and_get_depth(c,etapes));
        });
-       var d_c = Math.max.apply(null, children_depths) +1;
+       var d_c = Math.max.apply(null, children_depths) + 1;
+       var d = 1;
        if (d_c > d) {
          d = d_c;
        };
@@ -117,15 +138,15 @@
        //console.log("inputs");
        //console.log(i);
 
-       lieux = [];
+       var lieux = [];
        var children = etapes[i].enfants;
        children.forEach(function (c) {
-         l_c = get_lieux(c,etapes);
+         var l_c = get_lieux(c,etapes);
          //console.log("children:");
          //console.log(l_c);
          //console.log("+");
          //console.log(lieux);
-         a = fusion(lieux,l_c);
+         var a = fusion(lieux,l_c);
          //console.log(lieux);
          lieux = Object.create(a);
          //console.log("after fusion");
@@ -133,7 +154,7 @@
        });
        lieux = fusion(lieux,[{"lieu":etapes[i].lieu}]);
        return lieux;
-     };
+      };
 
       var color = d3.scaleOrdinal(d3.schemePastel1);
 
@@ -141,8 +162,6 @@
 
         data_recipe = json.recettes[0];
         // on en aura besoin avant de changer le form
-
-
 
         // Load the recipe chosen in the LOCAL variable data_recipe.
         select.on("change", function(){
@@ -161,34 +180,6 @@
           .append("option")
           .attr("value", function(d) {return d.nom})
           .html(function(d) {return d.nom})
-
-
-
-
-        // ajout des valeurs en x et y
-
-        // x : calcul de profondeur
-        /*var get_depth = function (i,etapes){
-          d = 1;
-          //console.log("call withb i=");
-          //console.log(i);
-          var children = etapes[i].enfants;
-          children.forEach(function (c) {
-            d_c = get_depth(c,etapes);
-            if (d_c+1 > d) {
-              d = d_c+1;
-            }
-          });
-          //console.log("return :");
-          //console.log(d);
-          return d;
-        };
-        depth = get_depth(data_recipe.etapes.length-1,data_recipe.etapes);
-
-
-        //console.log(depth);*/
-
-
 
 
         // choix de localisation des lieux :
@@ -217,7 +208,7 @@
         };
 
         console.log(locations_obj);
-/*
+        /*
         var locations_obj = [{lieu: "plan de travail 1", id: 4},
         {lieu: "plaque de cuisson 1", id: 2},
         {lieu: "plan de travail 2", id: 3},
@@ -227,8 +218,7 @@
         locations_obj.sort(function(a, b) {
           return a.id - b.id;
         });
-
-*/
+        */
 
         // Create background for locations (four, plaque de travail 1, ...)
         var heigth_rect = (height - margins.top - margins.bottom) / locations_obj.length;
@@ -291,61 +281,148 @@
         //console.log(data_recipe.etapes)
         var max_depth = set_and_get_depth(data_recipe.etapes.length-1,data_recipe.etapes);
 
-        Scale_x = d3.scaleLinear() // prend en entrée les profondeurs, et renvoie les x
-        .domain([0,max_depth+1])
-        .range([margins.left,width-margins.right]);
+        scale_x = d3.scaleLinear() // prend en entrée les profondeurs, et renvoie les x
+          .domain([0, max_depth + 1])
+          .range([margins.left,width-margins.right]);
 
 
         var nodes = svg.selectAll(".node").data(data_recipe.etapes).enter()
           .append("g")
           .attr("class", "node")
+          .attr("id", function(d){
+            return "node_" + d.identifiant
+          })
           .attr("transform", function(d){
+            // Get the x position of the node in the grid
+            var x = scale_x(d.depth);
+            d.x = x;
+            d.x_index = d.depth;
 
             // Get the id of the y position of the node.
+            var y_index;
             for (var ind = 0; ind < locations_obj.length; ind++){
               if (locations_obj[ind].lieu === d.lieu){
-                var y_index = locations_obj[ind].id;
+                y_index = locations_obj[ind].id;
               }
             }
-            // Get the x position of the node in the grid
-
-
-            var x = Scale_x(d.depth);
-            d.x = x;
             var y = margins.top + (heigth_rect + margins.inter_rect) * (y_index - 1/2);
             d.y = y;
+            d.y_index = y_index
             return "translate(" + x + "," + y + ")"
           })
 
-        drawTree(data_recipe.etapes);
 
         nodes.append('rect')
-          .attr("width", "10")
-          .attr("height", "10")
+          .attr("transform", function(){
+            return "translate(" + (-size_node/2) + "," + (-size_node/2) + ")"
+          })
+          .attr("width", size_node)
+          .attr("height", size_node)
           .attr("fill", "red")
 
         nodes.append("text")
           .html(function(d){
-            return d.identifiant + ": " + capitalize(d.description_courte)
+            return capitalize(d.description_courte) + " (" + d.identifiant + ")"
+          })
+          .attr("transform", function(){
+          	return "translate(" + (-size_node) + "," + (-size_node) + ")"
           })
 
+        drawTree(data_recipe.etapes);
 
 
-        //console.log(data_recipe)
-        //console.log(locations_obj)
+
+        function getNextNode(selectedNode, direction){
+          //var x_index_source = data_recipe.etapes[selectedNode].x_index
+          //    y_index_source = data_recipe.etapes[selectedNode].y_index;
+
+          //console.log(x_index_source, y_index_source)
+
+           switch (direction){
+            case 37: //gauche
+              if (selectedNode >= 1){
+                selectedNode -= 1
+              } else {
+                selectedNode = -1
+              }
+              break
+            case 38: // haut
+
+              break
+            case 39: // Droite.    
+              if (selectedNode < data_recipe.etapes.length - 1){
+                selectedNode += 1
+              } else {
+                selectedNode = -1
+              }
+              break
+            case 40: // Bas  
+              break
+          }
+          return selectedNode
+        }
 
 
+        d3.select('body').on("keydown", function(d) {
+
+          if (selectedNode === -1){
+            // Do nothing
+          } else {
+            // Remove old green node.  
+            nodes.selectAll("g#node_" + selectedNode + " > rect")
+              .transition()
+              .attr("fill", 'red')
+              .attr("transform", function(){
+                return "translate(" + (-size_node/2) + "," + (-size_node/2) + ")"
+              })
+              .attr("width", size_node)
+              .attr("height", size_node)
+
+            //Hide tooltip
+            hideTooltip()
+          }
+
+          selectedNode = getNextNode(selectedNode, d3.event.keyCode) 
+
+          if (selectedNode === -1){
+            // Do nothing
+          } else {
+            nodes.selectAll("g#node_" + selectedNode + " > rect")
+              .transition()
+              .attr("fill", 'green')
+              .attr("transform", "translate(" + (-size_node) + "," + (-size_node) + ")")
+              
+              .attr("width", size_node*2)
+              .attr("height", size_node*2)
+
+            showTooltip(data_recipe.etapes[selectedNode].x - 50, data_recipe.etapes[selectedNode].y + 50)   
+          }
+        })
+
+
+        function showTooltip(x, y){
+          tooltip
+            .classed('hidden', false)
+            .attr('style', 'left:' + x + 'px; top:' + y + 'px')
+            .html(function(){
+              return data_recipe.etapes[selectedNode].description_longue
+            })
+        }
+
+        function hideTooltip(){
+          tooltip
+            .classed('hidden', true)
+        }
 
 
       })
 
 
 
-    function capitalize(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-    }
+      function capitalize(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
+
     </script>
-
-
   </body>
 </html>
