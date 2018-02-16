@@ -135,20 +135,6 @@
       };
 
 
-      // Fonction pour metter les noeuds le plus haut possible
-      var set_highest = function (i,etapes){
-        var parent = +etapes[i].parent;
-        if (parent >= 0){   // On exclut le seul noeud qui n'a pas de parents
-          etapes[i].height = etapes[parent].height-1;
-        };
-
-        etapes[i].enfants.forEach(function (c) {
-          set_highest(c,etapes);
-        });
-      };
-
-
-
       //Ajout de TOUS les lieux dans une liste
       var get_lieux = function (etapes){
        //console.log("inputs");
@@ -285,8 +271,6 @@
 
         //console.log(data_recipe.etapes)
         var max_height = set_and_get_height(data_recipe.etapes.length-1,data_recipe.etapes);
-        set_highest(data_recipe.etapes.length-1,data_recipe.etapes);
-
 
         scale_x = d3.scaleLinear() // prend en entrée les profondeurs, et renvoie les x
           .domain([1, max_height + 1])
