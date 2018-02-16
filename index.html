@@ -141,7 +141,7 @@
 
       d3.json("recettes.json", function(json) {
 
-        data_recipe = json.recettes[2];
+        data_recipe = json.recettes[0];
         // on en aura besoin avant de changer le form
 
         // Load the recipe chosen in the LOCAL variable data_recipe.
@@ -379,10 +379,10 @@
         // on suppose que les champs x et y sont déjà définis pour chaque étape
         var all_lines_to_draw = []
         for(var i=0; i< etapes.length; i++){
-          var xp = etapes[i].x - size_node/2;
+          var xp = etapes[i].x - size_node*0.75;
           var yp = etapes[i].y;
           etapes[i].enfants.forEach(function (c) {
-            var xc = etapes[c].x + size_node/2;
+            var xc = etapes[c].x + size_node*0.75;
             var yc = etapes[c].y;
             if (etapes[i].height > etapes[c].height+1){
               var delta_height = etapes[i].height - etapes[c].height;
@@ -416,7 +416,8 @@
               return bezierLine([d[0],[x_int1,y_int1],[x_int2,y_int2],d[1]])
           })
           .attr("stroke", "#680000")
-          .attr("stroke-width", 1)
+          .attr("stroke-width", 5)
+          .style("opacity", 0.5)
           .attr("fill", "none")
           .attr("stroke-dasharray", function(){
             return this.getTotalLength() + ", " + this.getTotalLength()
@@ -491,8 +492,7 @@
             // Do nothing
           } else {
             nodes.selectAll("g#node_" + selectedNode + " > image")
-              .transition()
-              //.attr("fill", 'green') // enlevé
+              .transition().ease(d3.easeBackOut.overshoot(3))
               .attr("transform", "translate(" + (-size_node) + "," + (-size_node) + ")")
 
               .attr("width", size_node*2)
