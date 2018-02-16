@@ -225,14 +225,14 @@
 			{"identifiant" :"7",
 			"description_courte" : "Recouvrir le brownie de cookie",
 			"description_longue" : "Recouvrir le brownie de cookie",
-			"enfants" : ["0","4","6"],
+			"enfants" : ["4","6"],
 			"type":"merge",
-			"lieu" : "four"},
+			"lieu" : "plan de travail 1"},
 			
 			{"identifiant" :"8",
 			"description_courte" : "Cuisson 25 min, 180°C",
 			"description_longue" : "Enfourner à 180°C environ 25 min",
-			"enfants" : ["7"],
+			"enfants" : ["0","7"],
 			"type":"cuisson_four",
 			"lieu" : "four"},
 
