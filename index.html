@@ -56,6 +56,7 @@
 
       <svg></svg>
 
+	  
 
     <script>
 
@@ -71,7 +72,7 @@
           padding_right = 30;
 
       console.log(width, height)
-      var size_node = 10;
+      var size_node = 25;
 
       var svg = d3.select("svg")
         .attr("width", width)
@@ -280,19 +281,30 @@
             d.y_index = y_index
             return "translate(" + x + "," + y + ")"
           })
-
-
-        nodes.append('rect')
-          .attr("width", 0)
-          .attr("height", 0)
-          .attr("fill", "red")
-          .transition().ease(d3.easeBackOut.overshoot(10)).delay(function(d, i){return i*70}).duration(400)
-          .attr("transform", function(){
+		 
+		nodes.append('image')
+			.attr("transform", function(){
             return "translate(" + (-size_node/2) + "," + (-size_node/2) + ")"
           })
-          .attr("width", size_node)
-          .attr("height", size_node)
-
+			.attr("width", size_node)
+			.attr("height", size_node)
+			// Fonction pour avoir la bonne image en fonction du type d'étape
+			.attr('xlink:href',function(d){
+			if (d.type =="merge"){return 'icones/merge.svg'}
+			if (d.type =="ajout"){return 'icones/ajout.svg'}
+			if (d.type =="decoupe"){return 'icones/decoupe.svg'}
+			if (d.type =="cuisson_plaque"){return 'icones/cuisson_plaque.svg'}
+			if (d.type =="cuisson_four"){return 'icones/cuisson_four.svg'}
+			if (d.type =="patienter"){return 'icones/patienter.svg'}
+			else{
+			return ('icones/autre.svg')}})
+			
+			.attr('class', 'pico')
+			// while adding an image to an svg these are the coordinates i think of the top left
+			.attr('x', '0')
+			.attr('y', '0')
+			//.attr('background', 'red')
+		
 
         // =======================
         // ========= texte =======
@@ -406,7 +418,7 @@
 
 
         d3.select('body').on("keydown", function(d) {
-
+		/*	
           if (selectedNode === -1){
             // Do nothing
           } else {
@@ -441,7 +453,45 @@
           }
         })
 
+		*/
+		
+		
+		
+		          if (selectedNode === -1){
+            // Do nothing
+          } else {
 
+            nodes.selectAll("g#node_" + selectedNode + " > image")
+              .transition()
+              //.attr("fill", 'red') //enlevé car on a des icones et plus des carrés
+              .attr("transform", function(){
+                return "translate(" + (-size_node/2) + "," + (-size_node/2) + ")"
+              })
+              .attr("width", size_node)
+              .attr("height", size_node)
+
+            //Hide tooltip
+            hideTooltip()
+          }
+
+          selectedNode = getNextNode(selectedNode, d3.event.keyCode)
+
+          if (selectedNode === -1){
+            // Do nothing
+          } else {
+            nodes.selectAll("g#node_" + selectedNode + " > image")
+              .transition()
+              //.attr("fill", 'green') // enlevé
+              .attr("transform", "translate(" + (-size_node) + "," + (-size_node) + ")")
+
+              .attr("width", size_node*2)
+              .attr("height", size_node*2)
+			//j'ai changé le 50 en 100
+            showTooltip(data_recipe.etapes[selectedNode].x - 100, data_recipe.etapes[selectedNode].y + 100)
+          }
+        })
+		
+		
         function showTooltip(x, y){
           tooltip
             .classed('hidden', false)
