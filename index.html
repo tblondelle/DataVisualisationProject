@@ -33,10 +33,26 @@
 
   </head>
   <body>
-    <nav id="nav" class="navbar navbar-dark bg-primary">
-      <a class="navbar-brand" href="">SpeedCooking</a>
-      <select class="selectRecipes"></select>
+    	<!-- Barre de titre -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Speedcooking</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/tblondelle/DataVisualisationProject">Fork me on github</a>
+      </li>
+
+	</ul>
+	
+	<select class="selectRecipes"></select>  
+
+	</div>
     </nav>
+ 
 
       <svg></svg>
 
@@ -133,20 +149,6 @@
          etapes[i].height = h;
        return h;
       };
-
-
-      // Fonction pour metter les noeuds le plus haut possible
-      var set_highest = function (i,etapes){
-        var parent = +etapes[i].parent;
-        if (parent >= 0){   // On exclut le seul noeud qui n'a pas de parents
-          etapes[i].height = etapes[parent].height-1;
-        };
-
-        etapes[i].enfants.forEach(function (c) {
-          set_highest(c,etapes);
-        });
-      };
-
 
 
       //Ajout de TOUS les lieux dans une liste
@@ -285,8 +287,6 @@
 
         //console.log(data_recipe.etapes)
         var max_height = set_and_get_height(data_recipe.etapes.length-1,data_recipe.etapes);
-        set_highest(data_recipe.etapes.length-1,data_recipe.etapes);
-
 
         scale_x = d3.scaleLinear() // prend en entrée les profondeurs, et renvoie les x
           .domain([1, max_height + 1])
