@@ -13,12 +13,6 @@
     <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
-    <style>
-      svg {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      }
-    </style>
-
 
     <!-- Tooltip style -->
     <style>
@@ -44,21 +38,23 @@
       <select class="selectRecipes"></select>
     </nav>
 
-
-    <div class="container">
-      <!-- Content here -->
       <svg></svg>
-    </div>
 
 
     <script>
 
-      var width = 900,
-          height = 500,
+
+      var w = window.innerWidth
+      var h = window.innerHeight - 100
+
+
+      var width = w || 900,
+          height = h,
           margins = {top: 30, right: 20, left: 20, bottom: 20, inter_rect: 0}
           temp_internode_distance = 50,
           padding_right = 30;
 
+      console.log(width, height)
       var size_node = 10;
 
       var svg = d3.select("svg")
@@ -72,7 +68,6 @@
 
 
       var selectedNode = -1;
-
 
       var tooltip = d3.select('body').append('div')
         .attr('class', 'hidden tooltip');
@@ -90,10 +85,10 @@
         var x_int2 = x1*(1/3) + x2*(2/3);
         var y_int2 = y2;
       /*     x1     x_int1
-        x       x
+             x       x
 
-                        x       x
-                     x_int2     x2            */
+                         x       x
+                      x_int2     x2            */
         svg.append('path')
             .attr("d", bezierLine([[x1,y1],[x_int1,y_int1],[x_int2,y_int2],[x2,y2]]))
             .attr("stroke", "black")
