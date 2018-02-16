@@ -275,9 +275,7 @@ width="18px" />
             id_min++;
           };
         };
-
-
-
+		
         // Create background for locations (four, plaque de travail 1, ...)
         var heigth_rect = (height - margins.top - margins.bottom) / locations_obj.length;
 
@@ -377,9 +375,7 @@ width="18px" />
           })
 			.attr("width", size_node)
 			.attr("height", size_node)
-			// Ici faire une fonction pour avoir la bonne image en fonction du bon type d'étape
-			
-
+			// Fonction pour avoir la bonne image en fonction du type d'étape
 			.attr('xlink:href',function(d){
 			if (d.type =="merge"){return 'icones/merge.svg'}
 			if (d.type =="ajout"){return 'icones/ajout.svg'}
@@ -390,16 +386,13 @@ width="18px" />
 			else{
 			return ('icones/autre.svg')}})
 			
-			
-			
-			
 			.attr('class', 'pico')
 			// while adding an image to an svg these are the coordinates i think of the top left
 			.attr('x', '0')
 			.attr('y', '0')
 			//.attr('background', 'red')
 		
-		
+		// Inutile maintenant qu'on n'utilise plus des carrés rouges
 		/*
         nodes.append('rect')
           .attr("transform", function(){
@@ -409,6 +402,8 @@ width="18px" />
           .attr("height", size_node)
           .attr("fill", "red")
 		*/
+		
+		
 		// \\ ******  Fin des changements ici  *****
         // =======================
         // ========= texte =======
