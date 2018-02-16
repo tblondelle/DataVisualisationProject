@@ -1,3 +1,7 @@
+
+
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -12,12 +16,6 @@
     <script src="https://d3js.org/d3-color.v1.min.js"></script>
     <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-
-    <style>
-      svg {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      }
-    </style>
 
 
     <!-- Tooltip style -->
@@ -39,8 +37,7 @@
 
   </head>
   <body>
-  
-	<!-- Barre de titre -->
+    	<!-- Barre de titre -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Speedcooking</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,16 +56,9 @@
 
 	</div>
     </nav>
-	
-	
+ 
 
-
-    <div class="container">
-      <!-- Content here -->
       <svg></svg>
-    </div>
-
-	
 	<img 
     src="icones/ajout.svg" 
     alt="ajouter"
@@ -115,16 +105,23 @@
     src="icones/patienter.svg" 
     alt="patienter"
     height="18px"
-    width="18px" />
-	
+width="18px" />
+
+
     <script>
 
-      var width = 900,
-          height = 500,
+
+      var w = window.innerWidth
+      var h = window.innerHeight - 100
+
+
+      var width = w || 900,
+          height = h,
           margins = {top: 30, right: 20, left: 20, bottom: 20, inter_rect: 0}
           temp_internode_distance = 50,
           padding_right = 30;
 
+      console.log(width, height)
       var size_node = 10;
 
       var svg = d3.select("svg")
@@ -137,8 +134,7 @@
       var data_recipe;
 
 
-      var selectedNode = -1; 
-
+      var selectedNode = -1;
 
       var tooltip = d3.select('body').append('div')
         .attr('class', 'hidden tooltip');
@@ -156,10 +152,10 @@
         var x_int2 = x1*(1/3) + x2*(2/3);
         var y_int2 = y2;
       /*     x1     x_int1
-        x       x
+             x       x
 
-                        x       x
-                     x_int2     x2            */
+                         x       x
+                      x_int2     x2            */
         svg.append('path')
             .attr("d", bezierLine([[x1,y1],[x_int1,y_int1],[x_int2,y_int2],[x2,y2]]))
             .attr("stroke", "black")
@@ -176,27 +172,34 @@
           children.forEach(function (c) {
             var xc = etapes[c].x + size_node/2;
             var yc = etapes[c].y;
-            addLine(xp,yp,xc,yc);
+            if (etapes[i].height > etapes[c].height+1){
+              var delta_height = etapes[i].height - etapes[c].height;
+              var new_xc = (xc-xp)/delta_height + xp;
+              addLine(xp,yp,new_xc,yc);
+              addLine(new_xc,yc,xc,yc); // ligne droite jusqu'au virage
+
+            } else {
+              addLine(xp,yp,xc,yc);
+            };
           });
         };
       };
 
       //Calcul de profondeur
-      var set_and_get_depth = function (i,etapes){
-       var children_depths = [];
+      var set_and_get_height = function (i,etapes){
+       var children_heights = [];
        etapes[i].enfants.forEach(function (c) {
-         children_depths.push(set_and_get_depth(c,etapes));
+         children_heights.push(set_and_get_height(c,etapes));
        });
-       var d_c = Math.max.apply(null, children_depths) + 1;
-       var d = 1;
-       if (d_c > d) {
-         d = d_c;
+       var h_c = Math.max.apply(null, children_heights) + 1;
+       var h = 1;
+       if (h_c > h) {
+         h = h_c;
        };
-       // setting the depths for the children
-       etapes[i].depth = d;
-       return d;
+       // setting the heights for the children
+         etapes[i].height = h;
+       return h;
       };
-
 
 
       //Ajout de TOUS les lieux dans une liste
@@ -226,7 +229,7 @@
 
       d3.json("recettes.json", function(json) {
 
-        data_recipe = json.recettes[0];
+        data_recipe = json.recettes[2];
         // on en aura besoin avant de changer le form
 
         // Load the recipe chosen in the LOCAL variable data_recipe.
@@ -273,18 +276,7 @@
           };
         };
 
-        console.log(locations_obj);
-        /*
-        var locations_obj = [{lieu: "plan de travail 1", id: 4},
-        {lieu: "plaque de cuisson 1", id: 2},
-        {lieu: "plan de travail 2", id: 3},
-        {lieu: "four", id: 1},
-        {lieu: "plan de travail 3", id: 5}]
 
-        locations_obj.sort(function(a, b) {
-          return a.id - b.id;
-        });
-        */
 
         // Create background for locations (four, plaque de travail 1, ...)
         var heigth_rect = (height - margins.top - margins.bottom) / locations_obj.length;
@@ -345,11 +337,11 @@
 
 
         //console.log(data_recipe.etapes)
-        var max_depth = set_and_get_depth(data_recipe.etapes.length-1,data_recipe.etapes);
+        var max_height = set_and_get_height(data_recipe.etapes.length-1,data_recipe.etapes);
 
         scale_x = d3.scaleLinear() // prend en entrée les profondeurs, et renvoie les x
-          .domain([0, max_depth + 1])
-          .range([margins.left,width-margins.right]);
+          .domain([1, max_height + 1])
+          .range([2*margins.left,width-margins.right]);
 
 
         var nodes = svg.selectAll(".node").data(data_recipe.etapes).enter()
@@ -360,9 +352,9 @@
           })
           .attr("transform", function(d){
             // Get the x position of the node in the grid
-            var x = scale_x(d.depth);
+            var x = scale_x(d.height);
             d.x = x;
-            d.x_index = d.depth;
+            d.x_index = d.height;
 
             // Get the id of the y position of the node.
             var y_index;
@@ -376,10 +368,8 @@
             d.y_index = y_index
             return "translate(" + x + "," + y + ")"
           })
-		
-		
-		
-		
+
+
         nodes.append('rect')
           .attr("transform", function(){
             return "translate(" + (-size_node/2) + "," + (-size_node/2) + ")"
@@ -387,24 +377,34 @@
           .attr("width", size_node)
           .attr("height", size_node)
           .attr("fill", "red")
-		
 
-		// Je l'ai ajouté
-		nodes.append("svg")
-          .attr("transform", function(){
-            return "translate(" + (-size_node/2) + "," + (-size_node/2) + ")"
-          })
-          .attr("width", size_node)
-          .attr("height", size_node)
-          .attr("fill", "red")
-		
+
+        // =======================
+        // ========= texte =======
+        // =======================
+
+
+        var font_size = 10;  //TODO
+        var delta_x = (w-2*margins.left-margins.rigth)/(max_height+1);
+        var margin_text = 5;  // nb de pixels aurtour des textes
+        var max_letters = Math.ceil((delta_x-2*margin_text)/font_size)   // nombre max. de lettres dans la description
+          // avant un retour à la ligne
+        for (var i=0; i<data_recipe.etapes.length; i++){
+          d = data_recipe.etapes[i];
+          d.descriptons_courtes = [];
+        };
+
         nodes.append("text")
           .html(function(d){
             return capitalize(d.description_courte) + " (" + d.identifiant + ")"
           })
           .attr("transform", function(){
-          	return "translate(" + (-size_node) + "," + (-size_node) + ")"
+            return "translate(" + (-size_node) + "," + (-size_node) + ")"
           })
+          .attr("font-size", font_size);
+
+
+
 
         drawTree(data_recipe.etapes);
 
@@ -427,14 +427,14 @@
             case 38: // haut
 
               break
-            case 39: // Droite.    
+            case 39: // Droite.
               if (selectedNode < data_recipe.etapes.length - 1){
                 selectedNode += 1
               } else {
                 selectedNode = -1
               }
               break
-            case 40: // Bas  
+            case 40: // Bas
               break
           }
           return selectedNode
@@ -446,7 +446,7 @@
           if (selectedNode === -1){
             // Do nothing
           } else {
-            // Remove old green node.  
+            // Remove old green node.
             nodes.selectAll("g#node_" + selectedNode + " > rect")
               .transition()
               .attr("fill", 'red')
@@ -460,7 +460,7 @@
             hideTooltip()
           }
 
-          selectedNode = getNextNode(selectedNode, d3.event.keyCode) 
+          selectedNode = getNextNode(selectedNode, d3.event.keyCode)
 
           if (selectedNode === -1){
             // Do nothing
@@ -469,11 +469,11 @@
               .transition()
               .attr("fill", 'green')
               .attr("transform", "translate(" + (-size_node) + "," + (-size_node) + ")")
-              
+
               .attr("width", size_node*2)
               .attr("height", size_node*2)
 
-            showTooltip(data_recipe.etapes[selectedNode].x - 50, data_recipe.etapes[selectedNode].y + 50)   
+            showTooltip(data_recipe.etapes[selectedNode].x - 50, data_recipe.etapes[selectedNode].y + 50)
           }
         })
 
@@ -504,3 +504,4 @@
     </script>
   </body>
 </html>
+
