@@ -39,9 +39,102 @@
 
   </head>
   <body>
-    <nav id="nav" class="navbar navbar-dark bg-primary">
-      <a class="navbar-brand" href="">SpeedCooking_version_locale_de_test</a>
-      <select class="selectRecipes"></select>
+  
+	<!-- Barre de titre -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Speedcooking</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+	  
+	  <!--
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+	  -->
+	  
+    
+	
+		<!--
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+		-->  
+
+	<img 
+    src="icones/ajout.svg" 
+    alt="ajouter"
+    height="18px"
+    width="18px" />
+	
+	<img 
+    src="icones/autre.svg" 
+    alt="autre"
+    height="18px"
+    width="18px" />
+	
+	<img 
+    src="icones/cuisson_four.svg" 
+    alt="cuisson_four"
+    height="18px"
+    width="18px" />
+	
+	<img 
+    src="icones/cuisson_plaque.svg" 
+    alt="cuisson_plaque"
+    height="18px"
+    width="18px" />
+	
+	<img 
+    src="icones/decoupe.svg" 
+    alt="decoupe"
+    height="18px"
+    width="18px" />
+	
+		<img 
+    src="icones/merge.svg" 
+    alt="merge"
+    height="18px"
+    width="18px" />
+	
+		<img 
+    src="icones/mix.svg" 
+    alt="melanger"
+    height="18px"
+    width="18px" />
+	
+		<img 
+    src="icones/patienter.svg" 
+    alt="patienter"
+    height="18px"
+    width="18px" />
+
+	</ul>
+	
+	<select class="selectRecipes"></select>  
+
+	</div>
     </nav>
 
 
@@ -50,53 +143,7 @@
       <svg></svg>
     </div>
 
-	<img 
-    src="icones/ajout.svg" 
-    alt="add"
-    height="18px"
-    width="18px" />
 	
-	<img 
-    src="icones/autre.svg" 
-    alt="add"
-    height="18px"
-    width="18px" />
-	
-	<img 
-    src="icones/cuisson_four.svg" 
-    alt="add"
-    height="18px"
-    width="18px" />
-	
-	<img 
-    src="icones/cuisson_plaque.svg" 
-    alt="add"
-    height="18px"
-    width="18px" />
-	
-	<img 
-    src="icones/decoupe.svg" 
-    alt="add"
-    height="18px"
-    width="18px" />
-	
-		<img 
-    src="icones/merge.svg" 
-    alt="add"
-    height="18px"
-    width="18px" />
-	
-		<img 
-    src="icones/mix.svg" 
-    alt="add"
-    height="18px"
-    width="18px" />
-	
-		<img 
-    src="icones/patienter.svg" 
-    alt="add"
-    height="18px"
-    width="18px" />
 	
     <script>
 
@@ -357,8 +404,10 @@
             d.y_index = y_index
             return "translate(" + x + "," + y + ")"
           })
-
-
+		
+		
+		
+		
         nodes.append('rect')
           .attr("transform", function(){
             return "translate(" + (-size_node/2) + "," + (-size_node/2) + ")"
@@ -366,7 +415,17 @@
           .attr("width", size_node)
           .attr("height", size_node)
           .attr("fill", "red")
+		
 
+		// Je l'ai ajouté
+		nodes.append("svg")
+          .attr("transform", function(){
+            return "translate(" + (-size_node/2) + "," + (-size_node/2) + ")"
+          })
+          .attr("width", size_node)
+          .attr("height", size_node)
+          .attr("fill", "red")
+		
         nodes.append("text")
           .html(function(d){
             return capitalize(d.description_courte) + " (" + d.identifiant + ")"
