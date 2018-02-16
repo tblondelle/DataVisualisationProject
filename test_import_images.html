@@ -369,34 +369,47 @@ width="18px" />
             return "translate(" + x + "," + y + ")"
           })
 
-		// TODO 
-		
+		// \\ ******** Début des changements ici *************
+				
 		nodes.append('image')
 			.attr("transform", function(){
             return "translate(" + (-size_node/2) + "," + (-size_node/2) + ")"
           })
 			.attr("width", size_node)
 			.attr("height", size_node)
-			.attr('xlink:href','icones/merge.svg')
+			// Ici faire une fonction pour avoir la bonne image en fonction du bon type d'étape
 			
-		
+
+			.attr('xlink:href',function(d){
+			if (d.type =="merge"){return 'icones/merge.svg'}
+			if (d.type =="ajout"){return 'icones/ajout.svg'}
+			if (d.type =="decoupe"){return 'icones/decoupe.svg'}
+			if (d.type =="cuisson_plaque"){return 'icones/cuisson_plaque.svg'}
+			if (d.type =="cuisson_four"){return 'icones/cuisson_four.svg'}
+			if (d.type =="patienter"){return 'icones/patienter.svg'}
+			else{
+			return ('icones/autre.svg')}})
+			
+			
+			
+			
 			.attr('class', 'pico')
 			// while adding an image to an svg these are the coordinates i think of the top left
 			.attr('x', '0')
 			.attr('y', '0')
-			.attr('background', 'red')
+			//.attr('background', 'red')
 		
 		
-		
-        //nodes.append('rect')
-          //.attr("transform", function(){
-            //return "translate(" + (-size_node/2) + "," + (-size_node/2) + ")"
-          //})
-          //.attr("width", size_node)
-          //.attr("height", size_node)
-          //.attr("fill", "red")
-
-
+		/*
+        nodes.append('rect')
+          .attr("transform", function(){
+            return "translate(" + (-size_node/2) + "," + (-size_node/2) + ")"
+          })
+          .attr("width", size_node)
+          .attr("height", size_node)
+          .attr("fill", "red")
+		*/
+		// \\ ******  Fin des changements ici  *****
         // =======================
         // ========= texte =======
         // =======================
@@ -460,14 +473,14 @@ width="18px" />
 
 
         d3.select('body').on("keydown", function(d) {
-
+		// ******  Debut des changements ici  *****
           if (selectedNode === -1){
             // Do nothing
           } else {
-            // Remove old green node.
-            nodes.selectAll("g#node_" + selectedNode + " > rect")
+
+            nodes.selectAll("g#node_" + selectedNode + " > image")
               .transition()
-              .attr("fill", 'red')
+              //.attr("fill", 'red') //enlevé car on a des icones et plus des carrés
               .attr("transform", function(){
                 return "translate(" + (-size_node/2) + "," + (-size_node/2) + ")"
               })
@@ -483,18 +496,18 @@ width="18px" />
           if (selectedNode === -1){
             // Do nothing
           } else {
-            nodes.selectAll("g#node_" + selectedNode + " > rect")
+            nodes.selectAll("g#node_" + selectedNode + " > image")
               .transition()
-              .attr("fill", 'green')
+              //.attr("fill", 'green') // enlevé
               .attr("transform", "translate(" + (-size_node) + "," + (-size_node) + ")")
 
               .attr("width", size_node*2)
               .attr("height", size_node*2)
-
-            showTooltip(data_recipe.etapes[selectedNode].x - 50, data_recipe.etapes[selectedNode].y + 50)
+			//j'ai changé le 50 en 100
+            showTooltip(data_recipe.etapes[selectedNode].x - 100, data_recipe.etapes[selectedNode].y + 100)
           }
         })
-
+		// \\ ******  Fin des changements ici  *****
 
         function showTooltip(x, y){
           tooltip

@@ -223,15 +223,24 @@
 			"lieu" : "plan de travail 2"},
 
 			{"identifiant" :"7",
-			"description_courte" : "Recouvrir le brownie de cookie, cuisson 25 min, 180°C",
-			"description_longue" : "Recouvrir le brownie de cookie et enfourner à 180°C environ 25 min",
+			"description_courte" : "Recouvrir le brownie de cookie",
+			"description_longue" : "Recouvrir le brownie de cookie",
 			"enfants" : ["0","4","6"],
+			"type":"merge",
+			"lieu" : "four"},
+			
+			{"identifiant" :"8",
+			"description_courte" : "Cuisson 25 min, 180°C",
+			"description_longue" : "Enfourner à 180°C environ 25 min",
+			"enfants" : ["7"],
+			"type":"cuisson_four",
 			"lieu" : "four"},
 
-			{"identifiant" :"8",
+			{"identifiant" :"9",
 			"description_courte" : "Découper en cubes",
 			"description_longue" : "Attendre que le gâteau ait refroidi pour le découper en petit cubes",
-			"enfants" : ["7"],
+			"enfants" : ["8"],
+			"type":"decoupe",
 			"lieu" : "plan de travail 1"}
 
 		]
