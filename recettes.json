@@ -1,5 +1,5 @@
 {"recettes":[
-	{ "nom": "tarte aux pommes",
+	{ "nom": "Tarte aux pommes",
 	  "ingredients":
 		[ "1 pâte brisée",
 		  "6 pommes",
@@ -20,7 +20,7 @@
 
 			{"identifiant" :"1",
 			"description_courte" : "Faire une compote",
-			"description_longue" : "Mettre les pommes dans une casserole avec un peu d'eau (1 verre ou 2). Bien remuer. Quand les pommes commencent é ramollir, ajouter un sachet ou un sachet et demi de sucre vanillé. Ajouter un peu d'eau si nécessaire. Vous saurez si la compote est préte une fois que les pommes ne seront plus dures du tout. Ce n'est pas grave s'il reste quelques morceaux. Laisser refroidir.",
+			"description_longue" : "Mettre les pommes dans une casserole avec un peu d'eau (1 verre ou 2). Bien remuer. Quand les pommes commencent à ramollir, ajouter un sachet ou un sachet et demi de sucre vanillé. Ajouter un peu d'eau si nécessaire. Vous saurez si la compote est préte une fois que les pommes ne seront plus dures du tout. Ce n'est pas grave s'il reste quelques morceaux. Laisser refroidir.",
 			"enfants" : ["0"],
 			"parent":"5",
 			"type":"cuisson_plaque",
@@ -28,7 +28,7 @@
 
 			{"identifiant" :"2",
 			"description_courte" : "Découper les autres pommes",
-			"description_longue" : "éplucher et découper les autres pommes en lamelles",
+			"description_longue" : "Éplucher et découper les autres pommes en lamelles",
 			"enfants" : [],
 			"parent":"5",
 			"type":"decoupe",
@@ -59,8 +59,8 @@
 			"lieu" : "plan de travail 3"},
 
 			{"identifiant" :"6",
-			"description_courte" : "Cuisson au four(30 min)",
-			"description_longue" : "Mettre au four et laisser cuire pendant 30 min max. Surveiller la cuisson. Vous pouvez ajouter un peu de sucre vanillé sur la tarte pendant que éé cuit pour caraméliser un peu.",
+			"description_courte" : "Cuisson au four (30 min)",
+			"description_longue" : "Mettre au four et laisser cuire pendant 30 min max. Surveiller la cuisson. Vous pouvez ajouter un peu de sucre vanillé sur la tarte pendant que ça cuit pour caraméliser un peu.",
 			"enfants" : ["3","5"],
 			"parent":"-1",
 			"type":"cuisson_four",
@@ -68,7 +68,7 @@
 		]
 	},
 
-	{ "nom": "gratin de courgettes",
+	{ "nom": "Gratin de courgettes",
 	  "ingredients":
 			[ "3 ou 4 gousses d'ail",
 	    "Sel et poivre",
@@ -215,7 +215,7 @@
 			"lieu" : "plan de travail 2"},
 
 			{"identifiant" :"6",
-			"description_courte" : "ajouter farine, levure et pépites",
+			"description_courte" : "Ajouter farine, levure et pépites",
 			"description_longue" : "Saupoudrer de farine et de levure, ajouter les pépites",
 			"enfants" : ["5"],
 			"parent":"7",

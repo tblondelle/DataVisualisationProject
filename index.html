@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Speedcooking</title>
+    <title>SpeedCooking</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
 
@@ -35,496 +35,494 @@
   <body>
     	<!-- Barre de titre -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Speedcooking</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <span class="navbar-brand">SpeedCooking</span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="https://github.com/tblondelle/DataVisualisationProject">Fork me on github</a>
-      </li>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/tblondelle/DataVisualisationProject">Fork me on Github</a>
+        </li>
+  	 </ul>
 
-	</ul>
+  	<select class="selectRecipes"></select>
 
-	<select class="selectRecipes"></select>
+  	</div>
+  </nav>
 
-	</div>
-    </nav>
-
-
-      <svg></svg>
+  <svg></svg>
 
 
 
-    <script>
+  <script>
 
 
-      var w = window.innerWidth
-      var h = window.innerHeight - 100
+    var w = window.innerWidth
+    var h = window.innerHeight - 100
 
 
-      var width = w || 900,
-          height = h,
-          margins = {top: 30, right: 20, left: 20, bottom: 20, inter_rect: 0}
-          temp_internode_distance = 50,
-          padding_right = 30;
+    var width = w || 900,
+        height = h,
+        margins = {top: 30, right: 20, left: 20, bottom: 20, inter_rect: 0}
+        temp_internode_distance = 50,
+        padding_right = 30;
 
-      console.log(width, height)
-      var size_node = 25;
+    console.log(width, height)
+    var size_node = 25;
 
-      var svg = d3.select("svg")
-        .attr("width", width)
-        .attr("height", height)
+    var svg = d3.select("svg")
+      .attr("width", width)
+      .attr("height", height)
 
-      var select = d3.select("select");
+    var select = d3.select("select");
 
-      var recipe_chosen;
-      var data_recipe;
+    var recipe_chosen;
+    var data_recipe;
 
 
-      var selectedNode = -1;
+    var selectedNode = -1;
 
-      var tooltip = d3.select('body').append('div')
-        .attr('class', 'hidden tooltip');
+    var tooltip = d3.select('body').append('div')
+      .attr('class', 'hidden tooltip');
 
-      var bezierLine = d3.line()
-        .x(function(d) { return d[0]; })
-        .y(function(d) { return d[1]; })
-        .curve(d3.curveBasis);
+    var bezierLine = d3.line()
+      .x(function(d) { return d[0]; })
+      .y(function(d) { return d[1]; })
+      .curve(d3.curveBasis);
 
 
 
 
-      //Calcul de profondeur
-      var set_and_get_height = function (i,etapes){
-       var children_heights = [];
-       etapes[i].enfants.forEach(function (c) {
-         children_heights.push(set_and_get_height(c,etapes));
-       });
-       var h_c = Math.max.apply(null, children_heights) + 1;
-       var h = 1;
-       if (h_c > h) {
-         h = h_c;
-       };
-       // setting the heights for the children
-         etapes[i].height = h;
-       return h;
+    //Calcul de profondeur
+    var set_and_get_height = function (i,etapes){
+     var children_heights = [];
+     etapes[i].enfants.forEach(function (c) {
+       children_heights.push(set_and_get_height(c,etapes));
+     });
+     var h_c = Math.max.apply(null, children_heights) + 1;
+     var h = 1;
+     if (h_c > h) {
+       h = h_c;
+     };
+     // setting the heights for the children
+       etapes[i].height = h;
+     return h;
+    };
+
+
+    //Ajout de TOUS les lieux dans une liste
+    var get_lieux = function (etapes){
+     //console.log("inputs");
+     //console.log(i);
+
+     var lieux = [];
+     var children = etapes[i].enfants;
+     children.forEach(function (c) {
+       var l_c = get_lieux(c,etapes);
+       //console.log("children:");
+       //console.log(l_c);
+       //console.log("+");
+       //console.log(lieux);
+       var a = fusion(lieux,l_c);
+       //console.log(lieux);
+       lieux = Object.create(a);
+       //console.log("after fusion");
+       //console.log(lieux);
+     });
+     lieux = fusion(lieux,[{"lieu":etapes[i].lieu}]);
+     return lieux;
+    };
+
+    var color = d3.scaleOrdinal(d3.schemePastel1);
+
+    d3.json("recettes.json", function(json) {
+
+      data_recipe = json.recettes[0];
+      // on en aura besoin avant de changer le form
+
+      // Load the recipe chosen in the LOCAL variable data_recipe.
+      select.on("change", function(){
+          recipe_chosen = d3.select(".selectRecipes").node().value;
+
+          // Put info with selected information.
+          for (var i = 0; i< json.recettes.length; i++){
+            if (json.recettes[i].nom == recipe_chosen) {
+              data_recipe = json.recettes[i]
+            }
+          }
+      });
+
+      // Add all recipe chosen in the dropdown.
+      select.selectAll("option").data(json.recettes).enter()
+        .append("option")
+        .attr("value", function(d) {return d.nom})
+        .html(function(d) {return d.nom})
+
+
+      // choix de localisation des lieux :
+      // On commence par chercher un four. S'il y en a un, on le met au dessus
+
+      var locations_obj = [];
+      var lieux_visites = [];
+      for (var i=0; i<data_recipe.etapes.length; i++){
+        console.log(data_recipe.etapes[i].lieux);
+        if (data_recipe.etapes[i].lieu == 'four'){
+          locations_obj[0] = {lieu: "four", id: 1};
+          lieux_visites[0] = "four";
+        };
       };
 
+      // Ensuite, on parcourt les étapes pour y ajouter les lieux
+      var id_min = locations_obj.length;  // 1 si n a ajoute le four, 0 sinon
 
-      //Ajout de TOUS les lieux dans une liste
-      var get_lieux = function (etapes){
-       //console.log("inputs");
-       //console.log(i);
-
-       var lieux = [];
-       var children = etapes[i].enfants;
-       children.forEach(function (c) {
-         var l_c = get_lieux(c,etapes);
-         //console.log("children:");
-         //console.log(l_c);
-         //console.log("+");
-         //console.log(lieux);
-         var a = fusion(lieux,l_c);
-         //console.log(lieux);
-         lieux = Object.create(a);
-         //console.log("after fusion");
-         //console.log(lieux);
-       });
-       lieux = fusion(lieux,[{"lieu":etapes[i].lieu}]);
-       return lieux;
+      for (var i=0; i<data_recipe.etapes.length; i++){
+        var lieu = data_recipe.etapes[i].lieu;
+        if (! lieux_visites.includes(lieu)) {
+          locations_obj[id_min] = {lieu: lieu, id: id_min+1};
+          lieux_visites[id_min] = lieu;
+          id_min++;
+        };
       };
 
-      var color = d3.scaleOrdinal(d3.schemePastel1);
-
-      d3.json("recettes.json", function(json) {
-
-        data_recipe = json.recettes[0];
-        // on en aura besoin avant de changer le form
-
-        // Load the recipe chosen in the LOCAL variable data_recipe.
-        select.on("change", function(){
-            recipe_chosen = d3.select(".selectRecipes").node().value;
-
-            // Put info with selected information.
-            for (var i = 0; i< json.recettes.length; i++){
-              if (json.recettes[i].nom == recipe_chosen) {
-                data_recipe = json.recettes[i]
-              }
-            }
-        });
-
-        // Add all recipe chosen in the dropdown.
-        select.selectAll("option").data(json.recettes).enter()
-          .append("option")
-          .attr("value", function(d) {return d.nom})
-          .html(function(d) {return d.nom})
+      svg.selectAll("path").transition().attr("fill", "red")
 
 
-        // choix de localisation des lieux :
-        // On commence par chercher un four. S'il y en a un, on le met au dessus
+      // Create background for locations (four, plaque de travail 1, ...)
+      var heigth_rect = (height - margins.top - margins.bottom) / locations_obj.length;
 
-        var locations_obj = [];
-        var lieux_visites = [];
-        for (var i=0; i<data_recipe.etapes.length; i++){
-          console.log(data_recipe.etapes[i].lieux);
-          if (data_recipe.etapes[i].lieu == 'four'){
-            locations_obj[0] = {lieu: "four", id: 1};
-            lieux_visites[0] = "four";
-          };
-        };
-
-        // Ensuite, on parcourt les étapes pour y ajouter les lieux
-        var id_min = locations_obj.length;  // 1 si n a ajoute le four, 0 sinon
-
-        for (var i=0; i<data_recipe.etapes.length; i++){
-          var lieu = data_recipe.etapes[i].lieu;
-          if (! lieux_visites.includes(lieu)) {
-            locations_obj[id_min] = {lieu: lieu, id: id_min+1};
-            lieux_visites[id_min] = lieu;
-            id_min++;
-          };
-        };
-
-        svg.selectAll("path").transition().attr("fill", "red")
-
-
-        // Create background for locations (four, plaque de travail 1, ...)
-        var heigth_rect = (height - margins.top - margins.bottom) / locations_obj.length;
-
-        locations = svg.selectAll(".locations").data(locations_obj).enter()
-          .append("g")
-            .attr("class", "locations")
-            .attr("transform", function(d, i) {
-              var translateY = parseInt(margins.top) + i*(heigth_rect + margins.inter_rect);
-              return "translate(" + margins.left + "," + translateY + ")"
-            })
-
-        locations.append("rect")
-          .attr("class", function(d){return d.lieu})
-          .attr("width", function(){return width - margins.right - margins.left})
-          .attr("height", function(d){return heigth_rect})
-          .attr("x", 0)
-          .attr("y", 0)
-          .attr("fill", function(d,i){
-            //console.log(i%2)
-            if (i%2 !== 0){
-              return "#eee"
-            } else {
-              return "#bbb"
-            }
-          })
-          .style("opacity", 0.5)
-
-        locations.append("text")
-          .style("font-weight", "bold")
-          .attr("class", "location_title")
+      locations = svg.selectAll(".locations").data(locations_obj).enter()
+        .append("g")
+          .attr("class", "locations")
           .attr("transform", function(d, i) {
-            return "translate(3,18)"
+            var translateY = parseInt(margins.top) + i*(heigth_rect + margins.inter_rect);
+            return "translate(" + margins.left + "," + translateY + ")"
           })
-          .html(function(d){return capitalize(d.lieu)})
 
-
-        // Store strings of locations in all_locations
-        var all_locations = []
-        data_recipe.etapes.forEach(function(d,i){
-          if (!all_locations.includes(d.lieu)){
-            all_locations.push(d.lieu)
+      locations.append("rect")
+        .attr("class", function(d){return d.lieu})
+        .attr("width", function(){return width - margins.right - margins.left})
+        .attr("height", function(d){return heigth_rect})
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("fill", function(d,i){
+          //console.log(i%2)
+          if (i%2 !== 0){
+            return "#eee"
+          } else {
+            return "#bbb"
           }
         })
+        .style("opacity", 0.5)
 
-        // Add in location_obj the nodes classified.
-        locations_obj.forEach(function(location,j){
-            location.etapes = [];
-          })
+      locations.append("text")
+        .style("font-weight", "bold")
+        .attr("class", "location_title")
+        .attr("transform", function(d, i) {
+          return "translate(3,18)"
+        })
+        .html(function(d){return capitalize(d.lieu)})
 
-        data_recipe.etapes.forEach(function(etape,i){
-          locations_obj.forEach(function(location,j){
-            if (location.lieu === etape.lieu){
-              location.etapes.push(etape.identifiant)
-            }
-          })
+
+      // Store strings of locations in all_locations
+      var all_locations = []
+      data_recipe.etapes.forEach(function(d,i){
+        if (!all_locations.includes(d.lieu)){
+          all_locations.push(d.lieu)
+        }
+      })
+
+      // Add in location_obj the nodes classified.
+      locations_obj.forEach(function(location,j){
+          location.etapes = [];
         })
 
+      data_recipe.etapes.forEach(function(etape,i){
+        locations_obj.forEach(function(location,j){
+          if (location.lieu === etape.lieu){
+            location.etapes.push(etape.identifiant)
+          }
+        })
+      })
 
-        //console.log(data_recipe.etapes)
-        var max_height = set_and_get_height(data_recipe.etapes.length-1,data_recipe.etapes);
 
-        scale_x = d3.scaleLinear() // prend en entrée les profondeurs, et renvoie les x
-          .domain([1, max_height + 1])
-          .range([2*margins.left,width-margins.right]);
+      //console.log(data_recipe.etapes)
+      var max_height = set_and_get_height(data_recipe.etapes.length-1,data_recipe.etapes);
+
+      scale_x = d3.scaleLinear() // prend en entrée les profondeurs, et renvoie les x
+        .domain([1, max_height + 1])
+        .range([2*margins.left,width-margins.right]);
 
 
-        var nodes = svg.selectAll(".node").data(data_recipe.etapes).enter()
-          .append("g")
-          .attr("class", "node")
-          .attr("id", function(d){
-            return "node_" + d.identifiant
-          })
-          .attr("transform", function(d){
-            // Get the x position of the node in the grid
-            var x = scale_x(d.height);
-            d.x = x;
-            d.x_index = d.height;
+      var nodes = svg.selectAll(".node").data(data_recipe.etapes).enter()
+        .append("g")
+        .attr("class", "node")
+        .attr("id", function(d){
+          return "node_" + d.identifiant
+        })
+        .attr("transform", function(d){
+          // Get the x position of the node in the grid
+          var x = scale_x(d.height);
+          d.x = x;
+          d.x_index = d.height;
 
-            // Get the id of the y position of the node.
-            var y_index;
-            for (var ind = 0; ind < locations_obj.length; ind++){
-              if (locations_obj[ind].lieu === d.lieu){
-                y_index = locations_obj[ind].id;
-              }
+          // Get the id of the y position of the node.
+          var y_index;
+          for (var ind = 0; ind < locations_obj.length; ind++){
+            if (locations_obj[ind].lieu === d.lieu){
+              y_index = locations_obj[ind].id;
             }
-            var y = margins.top + (heigth_rect + margins.inter_rect) * (y_index - 1/2);
-            d.y = y;
-            d.y_index = y_index
-            return "translate(" + x + "," + y + ")"
-          })
+          }
+          var y = margins.top + (heigth_rect + margins.inter_rect) * (y_index - 1/2);
+          d.y = y;
+          d.y_index = y_index
+          return "translate(" + x + "," + y + ")"
+        })
 
-		nodes.append('image')
-			.attr("width", 0)
-			.attr("height", 0)
-			// Fonction pour avoir la bonne image en fonction du type d'étape
-			.attr('xlink:href',function(d){
-        switch (d.type){
-          case "merge":
-            return 'icones/merge.svg'
-            break
-          case "ajout":
-            return 'icones/ajout.svg'
-            break
-          case "decoupe":
-            return 'icones/decoupe.svg'
-            break
-          case "cuisson_plaque":
-            return 'icones/cuisson_plaque.svg'
-            break
-          case "cuisson_four":
-            return 'icones/cuisson_four.svg'
-            break
-          case "patienter":
-            return 'icones/patienter.svg'
-            break
-          default:
-			     return ('icones/autre.svg')}
-         })
+	nodes.append('image')
+		.attr("width", 0)
+		.attr("height", 0)
+		// Fonction pour avoir la bonne image en fonction du type d'étape
+		.attr('xlink:href',function(d){
+      switch (d.type){
+        case "merge":
+          return 'icones/merge.svg'
+          break
+        case "ajout":
+          return 'icones/ajout.svg'
+          break
+        case "decoupe":
+          return 'icones/decoupe.svg'
+          break
+        case "cuisson_plaque":
+          return 'icones/cuisson_plaque.svg'
+          break
+        case "cuisson_four":
+          return 'icones/cuisson_four.svg'
+          break
+        case "patienter":
+          return 'icones/patienter.svg'
+          break
+        default:
+		     return ('icones/autre.svg')}
+       })
 
-			.attr('class', 'pico')
-			// while adding an image to an svg these are the coordinates i think of the top left
-      .attr('x', '0')
-			.attr('y', '0')
-      .transition().ease(d3.easeBackOut.overshoot(10)).delay(function(d, i){return i*70}).duration(400)
-      .attr("transform", function(){
-            return "translate(" + (-size_node/2) + "," + (-size_node/2) + ")"
-          })
-      .attr("width", size_node)
-      .attr("height", size_node)
+		.attr('class', 'pico')
+		// while adding an image to an svg these are the coordinates i think of the top left
+    .attr('x', '0')
+		.attr('y', '0')
+    .transition().ease(d3.easeBackOut.overshoot(10)).delay(function(d, i){return i*70}).duration(400)
+    .attr("transform", function(){
+          return "translate(" + (-size_node/2) + "," + (-size_node/2) + ")"
+        })
+    .attr("width", size_node)
+    .attr("height", size_node)
 
 
-        // =======================
-        // ========= texte =======
-        // =======================
+      // =======================
+      // ========= texte =======
+      // =======================
 
-        var font_size = 15;  //TODO
-        var margin_text = 2;  // nb de pixels aurtour des textes
-        var delta_x = Math.round((w-margins.left-margins.right-margin_text)/(max_height+1));
-        var max_letters = Math.floor(2.5*(delta_x-2*margin_text)/font_size) ;  // nombre max. de lettres dans la description
-          // avant un retour à la ligne
-          // le 2.5 est empirique
+      var font_size = 15;  //TODO
+      var margin_text = 2;  // nb de pixels aurtour des textes
+      var delta_x = Math.round((w-margins.left-margins.right-margin_text)/(max_height+1));
+      var max_letters = Math.floor(2.5*(delta_x-2*margin_text)/font_size) ;  // nombre max. de lettres dans la description
+        // avant un retour à la ligne
+        // le 2.5 est empirique
 
-        console.log(font_size,margin_text,delta_x,max_letters);
+      console.log(font_size,margin_text,delta_x,max_letters);
 
-        for (var i=0; i<data_recipe.etapes.length; i++){
-          d = data_recipe.etapes[i];
+      for (var i=0; i<data_recipe.etapes.length; i++){
+        d = data_recipe.etapes[i];
 
-          d.descriptions_courtes_lignes=[] ;
+        d.descriptions_courtes_lignes=[] ;
 
-          var desc = d.description_courte;
+        var desc = d.description_courte;
 
-          if (desc.length < max_letters){
-            // On affiche la ligne en bas
-            d.descriptions_courtes_lignes[0] = "";
-            d.descriptions_courtes_lignes[1] = capitalize((desc));
+        if (desc.length < max_letters){
+          // On affiche la ligne en bas
+          d.descriptions_courtes_lignes[0] = "";
+          d.descriptions_courtes_lignes[1] = capitalize((desc));
 
-          } else {
-            // on charche le premier caractère 'espace', pour couper
-            search = max_letters;
-            while ((desc[search] != ' ')&&(search >=1) ){
-              search = search-1;
-            };
-
-            d.descriptions_courtes_lignes[0] = capitalize((desc).substring(0,search));
-            d.descriptions_courtes_lignes[1] = capitalize((desc).substring(search));
+        } else {
+          // on charche le premier caractère 'espace', pour couper
+          search = max_letters;
+          while ((desc[search] != ' ')&&(search >=1) ){
+            search = search-1;
           };
+
+          d.descriptions_courtes_lignes[0] = capitalize((desc).substring(0,search));
+          d.descriptions_courtes_lignes[1] = capitalize((desc).substring(search));
         };
+      };
+
+      nodes.append("text")
+        .html(function(d){ return d.descriptions_courtes_lignes[1];})
+        .attr("transform", function(){
+          return "translate(" + (-Math.floor(0.7*size_node)) + "," + (-Math.floor(0.7*size_node)) + ")"
+        })
+        .attr("font-size", font_size);
 
         nodes.append("text")
-          .html(function(d){ return d.descriptions_courtes_lignes[1];})
+          .html(function(d){ return d.descriptions_courtes_lignes[0];  })
           .attr("transform", function(){
-            return "translate(" + (-Math.floor(0.7*size_node)) + "," + (-Math.floor(0.7*size_node)) + ")"
+            return "translate(" + (-Math.floor(0.7*size_node))+ "," + (-Math.floor(0.7*size_node)-font_size) + ")"
           })
           .attr("font-size", font_size);
 
-          nodes.append("text")
-            .html(function(d){ return d.descriptions_courtes_lignes[0];  })
-            .attr("transform", function(){
-              return "translate(" + (-Math.floor(0.7*size_node))+ "," + (-Math.floor(0.7*size_node)-font_size) + ")"
-            })
-            .attr("font-size", font_size);
+
+      //Create data for links
+      var etapes = data_recipe.etapes
+      // on suppose que les champs x et y sont déjà définis pour chaque étape
+      var all_lines_to_draw = []
+      for(var i=0; i< etapes.length; i++){
+        var xp = etapes[i].x - size_node*0.75;
+        var yp = etapes[i].y;
+        etapes[i].enfants.forEach(function (c) {
+          var xc = etapes[c].x + size_node*0.75;
+          var yc = etapes[c].y;
+          if (etapes[i].height > etapes[c].height+1){
+            var delta_height = etapes[i].height - etapes[c].height;
+            var new_xc = (xc-xp)/delta_height + xp;
+            all_lines_to_draw.push([[xp,yp],[new_xc,yc]]);
+            all_lines_to_draw.push([[new_xc,yc],[xc,yc]]); // ligne droite jusqu'au virage
+
+          } else {
+            all_lines_to_draw.push([[xp, yp],[xc,yc]])
+          };
+        });
+      };
+
+      all_lines_to_draw.sort(function (a, b) {
+        return a[0][0] - b[0][0];
+      });
 
 
-        //Create data for links
-        var etapes = data_recipe.etapes
-        // on suppose que les champs x et y sont déjà définis pour chaque étape
-        var all_lines_to_draw = []
-        for(var i=0; i< etapes.length; i++){
-          var xp = etapes[i].x - size_node*0.75;
-          var yp = etapes[i].y;
-          etapes[i].enfants.forEach(function (c) {
-            var xc = etapes[c].x + size_node*0.75;
-            var yc = etapes[c].y;
-            if (etapes[i].height > etapes[c].height+1){
-              var delta_height = etapes[i].height - etapes[c].height;
-              var new_xc = (xc-xp)/delta_height + xp;
-              all_lines_to_draw.push([[xp,yp],[new_xc,yc]]);
-              all_lines_to_draw.push([[new_xc,yc],[xc,yc]]); // ligne droite jusqu'au virage
+      var links = svg.selectAll(".links").data(all_lines_to_draw).enter()
+        .append('path')
+        .attr("class", "links")
+        .attr("d", function(d){
 
-            } else {
-              all_lines_to_draw.push([[xp, yp],[xc,yc]])
-            };
-          });
-        };
+            var x_int1 = d[0][0]*(2/3) + d[1][0]*(1/3),
+                y_int1 = d[0][1];
+            var x_int2 = d[0][0]*(1/3) + d[1][0]*(2/3);
+            var y_int2 = d[1][1];
 
-        all_lines_to_draw.sort(function (a, b) {
-          return a[0][0] - b[0][0];
+            console.log([d[0],[x_int1,y_int1],[x_int2,y_int2],d[1]])
+
+            return bezierLine([d[0],[x_int1,y_int1],[x_int2,y_int2],d[1]])
+        })
+        .attr("stroke", "#680000")
+        .attr("stroke-width", 5)
+        .style("opacity", 0.5)
+        .attr("fill", "none")
+        .attr("stroke-dasharray", function(){
+          return this.getTotalLength() + ", " + this.getTotalLength()
+        })
+        .attr("stroke-dashoffset", function(){
+          return -this.getTotalLength()
+        });
+
+      links.transition().delay(function(d, i){return i*70}).duration(400)
+        .attr("stroke-dashoffset", function(){
+          return  0
         });
 
 
-        var links = svg.selectAll(".links").data(all_lines_to_draw).enter()
-          .append('path')
-          .attr("class", "links")
-          .attr("d", function(d){
-
-              var x_int1 = d[0][0]*(2/3) + d[1][0]*(1/3),
-                  y_int1 = d[0][1];
-              var x_int2 = d[0][0]*(1/3) + d[1][0]*(2/3);
-              var y_int2 = d[1][1];
-
-              console.log([d[0],[x_int1,y_int1],[x_int2,y_int2],d[1]])
-
-              return bezierLine([d[0],[x_int1,y_int1],[x_int2,y_int2],d[1]])
-          })
-          .attr("stroke", "#680000")
-          .attr("stroke-width", 5)
-          .style("opacity", 0.5)
-          .attr("fill", "none")
-          .attr("stroke-dasharray", function(){
-            return this.getTotalLength() + ", " + this.getTotalLength()
-          })
-          .attr("stroke-dashoffset", function(){
-            return -this.getTotalLength()
-          });
-
-        links.transition().delay(function(d, i){return i*70}).duration(400)
-          .attr("stroke-dashoffset", function(){
-            return  0
-          });
 
 
+      function getNextNode(selectedNode, direction){
+        //var x_index_source = data_recipe.etapes[selectedNode].x_index
+        //    y_index_source = data_recipe.etapes[selectedNode].y_index;
 
+        //console.log(x_index_source, y_index_source)
 
-        function getNextNode(selectedNode, direction){
-          //var x_index_source = data_recipe.etapes[selectedNode].x_index
-          //    y_index_source = data_recipe.etapes[selectedNode].y_index;
+         switch (direction){
+          case 37: //gauche
+            if (selectedNode >= 1){
+              selectedNode -= 1
+            } else {
+              selectedNode = -1
+            }
+            break
+          case 38: // haut
 
-          //console.log(x_index_source, y_index_source)
-
-           switch (direction){
-            case 37: //gauche
-              if (selectedNode >= 1){
-                selectedNode -= 1
-              } else {
-                selectedNode = -1
-              }
-              break
-            case 38: // haut
-
-              break
-            case 39: // Droite.
-              if (selectedNode < data_recipe.etapes.length - 1){
-                selectedNode += 1
-              } else {
-                selectedNode = data_recipe.etapes.length
-              }
-              break
-            case 40: // Bas
-              break
-          }
-          return selectedNode
+            break
+          case 39: // Droite.
+            if (selectedNode < data_recipe.etapes.length - 1){
+              selectedNode += 1
+            } else {
+              selectedNode = data_recipe.etapes.length
+            }
+            break
+          case 40: // Bas
+            break
         }
+        return selectedNode
+      }
 
 
-        d3.select('body').on("keydown", function(d) {
+      d3.select('body').on("keydown", function(d) {
 
-          if (selectedNode === -1){
-            // Do nothing
-          } else {
-            // Remove old green node.
-            nodes.selectAll("g#node_" + selectedNode + " > image")
-              .transition()
-              .attr("transform", function(){
-                return "translate(" + (-size_node/2) + "," + (-size_node/2) + ")"
-              })
-              .attr("width", size_node)
-              .attr("height", size_node)
-
-            //Hide tooltip
-            hideTooltip()
-          }
-
-          selectedNode = getNextNode(selectedNode, d3.event.keyCode)
-
-
-
-
-          if (selectedNode === -1){
-            // Do nothing
-          } else {
-            nodes.selectAll("g#node_" + selectedNode + " > image")
-              .transition().ease(d3.easeBackOut.overshoot(3))
-              .attr("transform", "translate(" + (-size_node) + "," + (-size_node) + ")")
-
-              .attr("width", size_node*2)
-              .attr("height", size_node*2)
-			//j'ai changé le 50 en 100
-            showTooltip(data_recipe.etapes[selectedNode].x - 100, data_recipe.etapes[selectedNode].y + 100)
-          }
-        })
-
-
-
-        function showTooltip(x, y){
-          tooltip
-            .classed('hidden', false)
-            .attr('style', 'left:' + x + 'px; top:' + y + 'px')
-            .html(function(){
-              return data_recipe.etapes[selectedNode].description_longue
+        if (selectedNode === -1){
+          // Do nothing
+        } else {
+          // Remove old green node.
+          nodes.selectAll("g#node_" + selectedNode + " > image")
+            .transition()
+            .attr("transform", function(){
+              return "translate(" + (-size_node/2) + "," + (-size_node/2) + ")"
             })
+            .attr("width", size_node)
+            .attr("height", size_node)
+
+          //Hide tooltip
+          hideTooltip()
         }
 
-        function hideTooltip(){
-          tooltip
-            .classed('hidden', true)
+        selectedNode = getNextNode(selectedNode, d3.event.keyCode)
+
+
+
+
+        if (selectedNode === -1){
+          // Do nothing
+        } else {
+          nodes.selectAll("g#node_" + selectedNode + " > image")
+            .transition().ease(d3.easeBackOut.overshoot(3))
+            .attr("transform", "translate(" + (-size_node) + "," + (-size_node) + ")")
+
+            .attr("width", size_node*2)
+            .attr("height", size_node*2)
+		//j'ai changé le 50 en 100
+          showTooltip(data_recipe.etapes[selectedNode].x - 100, data_recipe.etapes[selectedNode].y + 100)
         }
       })
 
 
 
-      function capitalize(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
+      function showTooltip(x, y){
+        tooltip
+          .classed('hidden', false)
+          .attr('style', 'left:' + x + 'px; top:' + y + 'px')
+          .html(function(){
+            return data_recipe.etapes[selectedNode].description_longue
+          })
       }
 
-    </script>
-  </body>
+      function hideTooltip(){
+        tooltip
+          .classed('hidden', true)
+      }
+    })
+
+
+
+    function capitalize(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+  </script>
+</body>
 </html>
