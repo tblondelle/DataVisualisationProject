@@ -140,7 +140,7 @@
 
       d3.json("recettes.json", function(json) {
 
-        data_recipe = json.recettes[2];
+        data_recipe = json.recettes[1];
         // on en aura besoin avant de changer le form
 
         // Load the recipe chosen in the LOCAL variable data_recipe.
@@ -341,14 +341,18 @@
           });
         };
 
+        all_lines_to_draw.sort(function (a, b) {
+          return a[0][0] - b[0][0];
+        });
+
 
         var links = svg.selectAll(".links").data(all_lines_to_draw).enter()
           .append('path')
           .attr("class", "links")
           .attr("d", function(d){
 
-              var x_int1 = d[0][0]*(2/3) + d[1][0]*(1/3);
-              var y_int1 = d[0][1];
+              var x_int1 = d[0][0]*(2/3) + d[1][0]*(1/3), 
+                  y_int1 = d[0][1];
               var x_int2 = d[0][0]*(1/3) + d[1][0]*(2/3);
               var y_int2 = d[1][1];
 
@@ -442,6 +446,9 @@
         })
 
 
+
+
+
         function showTooltip(x, y){
           tooltip
             .classed('hidden', false)
@@ -455,8 +462,6 @@
           tooltip
             .classed('hidden', true)
         }
-
-
       })
 
 
