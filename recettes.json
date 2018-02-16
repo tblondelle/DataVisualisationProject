@@ -203,7 +203,7 @@
 			"description_longue" : "Étaler cette préparation dans un fond de moule",
 			"enfants" : ["3"],
 			"parent":"7",
-			"type":"decoupe",
+			"type":"autre",
 			"lieu" : "plan de travail 1"},
 
 			{"identifiant" :"5",
@@ -219,7 +219,7 @@
 			"description_longue" : "Saupoudrer de farine et de levure, ajouter les pépites",
 			"enfants" : ["5"],
 			"parent":"7",
-			"type":"decoupe",
+			"type":"ajout",
 			"lieu" : "plan de travail 2"},
 
 			{"identifiant" :"7",
@@ -237,9 +237,16 @@
 			"lieu" : "four"},
 
 			{"identifiant" :"9",
-			"description_courte" : "Découper en cubes",
-			"description_longue" : "Attendre que le gâteau ait refroidi pour le découper en petit cubes",
+			"description_courte" : "Patienter",
+			"description_longue" : "Attendre que le gâteau ait refroidi",
 			"enfants" : ["8"],
+			"type":"patienter",
+			"lieu" : "plan de travail 1"},
+			
+			{"identifiant" :"10",
+			"description_courte" : "Découper en cubes",
+			"description_longue" : "Couper le gateau en petits cubes",
+			"enfants" : ["9"],
 			"type":"decoupe",
 			"lieu" : "plan de travail 1"}
 
