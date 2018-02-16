@@ -122,7 +122,7 @@ width="18px" />
           padding_right = 30;
 
       console.log(width, height)
-      var size_node = 10;
+      var size_node = 25;
 
       var svg = d3.select("svg")
         .attr("width", width)
@@ -369,14 +369,32 @@ width="18px" />
             return "translate(" + x + "," + y + ")"
           })
 
-
-        nodes.append('rect')
-          .attr("transform", function(){
+		// TODO 
+		
+		nodes.append('image')
+			.attr("transform", function(){
             return "translate(" + (-size_node/2) + "," + (-size_node/2) + ")"
           })
-          .attr("width", size_node)
-          .attr("height", size_node)
-          .attr("fill", "red")
+			.attr("width", size_node)
+			.attr("height", size_node)
+			.attr('xlink:href','icones/merge.svg')
+			
+		
+			.attr('class', 'pico')
+			// while adding an image to an svg these are the coordinates i think of the top left
+			.attr('x', '0')
+			.attr('y', '0')
+			.attr('background', 'red')
+		
+		
+		
+        //nodes.append('rect')
+          //.attr("transform", function(){
+            //return "translate(" + (-size_node/2) + "," + (-size_node/2) + ")"
+          //})
+          //.attr("width", size_node)
+          //.attr("height", size_node)
+          //.attr("fill", "red")
 
 
         // =======================
