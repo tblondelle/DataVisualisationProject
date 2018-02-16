@@ -11,7 +11,7 @@
 		"source":"http://www.marmiton.org/recettes/recette_tarte-aux-pommes_18588.aspx",
 	  "etapes":
 	      [{"identifiant" :"0",
-			"description_courte" : "éplucher et découper 4 pommes",
+			"description_courte" : "découper 4 pommes",
 			"description_longue" : "éplucher et découper 4 pommes",
 			"enfants" : [],
 			"parent":"1",
@@ -27,7 +27,7 @@
 			"lieu" : "plaque de cuisson 1"},
 
 			{"identifiant" :"2",
-			"description_courte" : "éplucher et découper les autres pommes en lamelles",
+			"description_courte" : "Découper les autres pommes",
 			"description_longue" : "éplucher et découper les autres pommes en lamelles",
 			"enfants" : [],
 			"parent":"5",
@@ -35,7 +35,7 @@
 			"lieu" : "plan de travail 2"},
 
 			{"identifiant" :"3",
-			"description_courte" : "Préchauffer le four",
+			"description_courte" : "Préchauffer le four (210°C)",
 			"description_longue" : "Préchauffer le four à 210°C (thermostat 7)",
 			"enfants" : [],
 			"parent":"6",
@@ -51,7 +51,7 @@
 			"lieu" : "plan de travail 3"},
 
 			{"identifiant" :"5",
-			"description_courte" : "Verser la compote sur la pâte, et les lamelles sur la compote",
+			"description_courte" : "Verser compote puis lamelles",
 			"description_longue" : "Verser la compote sur la pâte et placer les lamelles de pommes en formant une spirale ou plusieurs cercles, au choix ! Disposer des lamelles de beurre dessus",
 			"enfants" : ["1","2","4"],
 			"parent":"6",
@@ -59,7 +59,7 @@
 			"lieu" : "plan de travail 3"},
 
 			{"identifiant" :"6",
-			"description_courte" : "Mettre au four (30 min)",
+			"description_courte" : "Cuisson au four(30 min)",
 			"description_longue" : "Mettre au four et laisser cuire pendant 30 min max. Surveiller la cuisson. Vous pouvez ajouter un peu de sucre vanillé sur la tarte pendant que éé cuit pour caraméliser un peu.",
 			"enfants" : ["3","5"],
 			"parent":"-1",
@@ -86,7 +86,7 @@
 	  "etapes":[
 
 			{"identifiant" :"0",
-			"description_courte" : "Laver et découper les courgettes en rondelles",
+			"description_courte" : "Découper les courgettes",
 			"description_longue" : "Faire des rondelles de 3 à 4 cm, sans enlever la peau",
 			"enfants" : [],
 			"parent":"2",
@@ -94,7 +94,7 @@
 			"lieu" : "plan de travail 1"},
 
 			{"identifiant" :"1",
-			"description_courte" : "Hacher l'ail en petit morceaux",
+			"description_courte" : "Hacher l'ail",
 			"description_longue" : "Hacher l'ail en petit morceaux",
 			"enfants" : [],
 			"parent":"2",
@@ -102,7 +102,7 @@
 			"lieu" : "plan de travail 2"},
 
 			{"identifiant" :"2",
-			"description_courte" : "Faire une revenier les courgettes",
+			"description_courte" : "Faire revenir les courgettes",
 			"description_longue" : "Ajouter l'huile d'olive, l'ail haché, une pincée de sel et de poivre. Laisser dorer pendant 5 à 10 minutes, les courgettes doivent être translucides",
 			"enfants" : ["0","1"],
 			"parent":"5",
@@ -110,8 +110,8 @@
 			"lieu" : "plaque de cuisson 1"},
 
 			{"identifiant" :"3",
-			"description_courte" : "Préchauffer le four à 180°",
-			"description_longue" : "Préchauffer le four à 180° (thermostat 6)",
+			"description_courte" : "Préchauffer le four (180°C)",
+			"description_longue" : "Préchauffer le four à 180°C (thermostat 6)",
 			"enfants" : [],
 			"parent":"5",
 			"type":"cuisson_four",
@@ -126,7 +126,7 @@
 			"lieu" : "plan de travail 3"},
 
 			{"identifiant" :"5",
-			"description_courte" : "Mettre les courgettes dans un plat à gratin, verser le mélange, saupoudrer de fromage",
+			"description_courte" : "Mettre dans le plat",
 			"description_longue" : "Mettre les courgettes dans un plat à gratin, verser le mélange, saupoudrer de fromage",
 			"enfants" : ["2","3","4"],
 			"parent":"6",
@@ -134,7 +134,7 @@
 			"lieu" : "plan de travail 1"},
 
 			{"identifiant" :"6",
-			"description_courte" : "Mettre le tout au four pendant 20 minutes",
+			"description_courte" : "Cuisson au four (20 minutes)",
 			"description_longue" : "Mettre le tout au four pendant 20 minutes, le dessus doit être doré et dur comme une omelette",
 			"enfants" : ["5"],
 			"parent":"-1",
@@ -167,7 +167,7 @@
 	  "etapes":[
 
 			{"identifiant" :"0",
-			"description_courte" : "Préchauffer le four à 180°C (thermostat 6)",
+			"description_courte" : "Préchauffer le four (180°C)",
 			"description_longue" : "Préchauffer le four à 180°C (thermostat 6)",
 			"enfants" : [],
 			"parent":"7",
@@ -175,7 +175,7 @@
 			"lieu" : "four"},
 
 			{"identifiant" :"1",
-			"description_courte" : "Faire fondre le chocolat, y ajouter le beurre de cacahuète",
+			"description_courte" : "Faire fondre le chocolat",
 			"description_longue" : "Faire fondre le chocolat, y ajouter le beurre de cacahuète",
 			"enfants" : [],
 			"parent":"2",
@@ -183,7 +183,7 @@
 			"lieu" : "plaque de cuisson 1"},
 
 			{"identifiant" :"2",
-			"description_courte" : "Saupoudrer de sucre, casser les oeufs et bien mélanger",
+			"description_courte" : "Ajouter le sucre et les oeufs",
 			"description_longue" : "Saupoudrer de sucre, casser les oeufs et bien mélanger",
 			"enfants" : ["1"],
 			"parent":"3",
@@ -191,7 +191,7 @@
 			"lieu" : "plaque de cuisson 1"},
 
 			{"identifiant" :"3",
-			"description_courte" : "Finir par la farine et les noix. ",
+			"description_courte" : "Ajouter la farine et les noix",
 			"description_longue" : "Finir par la farine et les noix. ",
 			"enfants" : ["2"],
 			"parent":"4",
@@ -199,7 +199,7 @@
 			"lieu" : "plaque de cuisson 1"},
 
 			{"identifiant" :"4",
-			"description_courte" : "Étaler cette préparation dans un fond de moule",
+			"description_courte" : "Etaler dans un moule",
 			"description_longue" : "Étaler cette préparation dans un fond de moule",
 			"enfants" : ["3"],
 			"parent":"7",
@@ -207,7 +207,7 @@
 			"lieu" : "plan de travail 1"},
 
 			{"identifiant" :"5",
-			"description_courte" : "Mélanger à la main le beurre mou au sucre, y ajouter l’oeuf, bien mélanger",
+			"description_courte" : "Mélanger beurre, sucre et oeufs",
 			"description_longue" : "Mélanger à la main le beurre mou au sucre, y ajouter l’oeuf, bien mélanger",
 			"enfants" : [],
 			"parent":"6",
@@ -215,7 +215,7 @@
 			"lieu" : "plan de travail 2"},
 
 			{"identifiant" :"6",
-			"description_courte" : "Saupoudrer de farine et de levure, ajouter les pépites",
+			"description_courte" : "ajouter farine, levure et pépites",
 			"description_longue" : "Saupoudrer de farine et de levure, ajouter les pépites",
 			"enfants" : ["5"],
 			"parent":"7",
@@ -223,13 +223,13 @@
 			"lieu" : "plan de travail 2"},
 
 			{"identifiant" :"7",
-			"description_courte" : "Recouvrir le brownie de cookie et enfourner à 180°C environ 25 min",
+			"description_courte" : "Recouvrir le brownie de cookie, cuisson 25 min, 180°C",
 			"description_longue" : "Recouvrir le brownie de cookie et enfourner à 180°C environ 25 min",
 			"enfants" : ["0","4","6"],
 			"lieu" : "four"},
 
 			{"identifiant" :"8",
-			"description_courte" : "Attendre que le gâteau ait refroidi pour le découper en petit cubes",
+			"description_courte" : "Découper en cubes",
 			"description_longue" : "Attendre que le gâteau ait refroidi pour le découper en petit cubes",
 			"enfants" : ["7"],
 			"lieu" : "plan de travail 1"}
