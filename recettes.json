@@ -226,6 +226,7 @@
 			"description_courte" : "Recouvrir le brownie de cookie",
 			"description_longue" : "Recouvrir le brownie de cookie",
 			"enfants" : ["4","6"],
+			"parent":"8",
 			"type":"merge",
 			"lieu" : "plan de travail 1"},
 			
@@ -233,6 +234,7 @@
 			"description_courte" : "Cuisson 25 min, 180°C",
 			"description_longue" : "Enfourner à 180°C environ 25 min",
 			"enfants" : ["0","7"],
+			"parent":"9",
 			"type":"cuisson_four",
 			"lieu" : "four"},
 
@@ -240,6 +242,7 @@
 			"description_courte" : "Patienter",
 			"description_longue" : "Attendre que le gâteau ait refroidi",
 			"enfants" : ["8"],
+			"parent":"10",
 			"type":"patienter",
 			"lieu" : "plan de travail 1"},
 			
@@ -247,6 +250,7 @@
 			"description_courte" : "Découper en cubes",
 			"description_longue" : "Couper le gateau en petits cubes",
 			"enfants" : ["9"],
+			"parent":"-1",
 			"type":"decoupe",
 			"lieu" : "plan de travail 1"}
 
