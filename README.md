@@ -21,19 +21,34 @@ Recepies are often represented as a sucessions of several steps in a cooking boo
 
 ## State of the art
 
+We can find recepies in cooking books or on specialised websites. The way recepies are represented on websites or in cooking books is similar : 
+
+* List of ingredients
+* List of tools
+* Number of portions
+* Other informations
+* List of different steps to perform
+
+iamge : Mettre deux exemples : le scan d'un livre et la capture d'un site
+
+The possibilities given by interactivity of the internet are not used in the visualisation : a recepie from a website can be printed without making any difference. 
 
 
 ## Solution
 
+The idea we had is to visualise recepies like a tree. Several branches merge in 
+
+image : 
 
 ## Choice of design
+sequentiel, pas temporel
+reprendre les idées du 5 sheet design. 
+
 
 ## Technical choices
 
 ## Data
 Formatage, source
-
-
 
 ## Description of the visualisation 
 
