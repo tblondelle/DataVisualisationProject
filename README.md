@@ -17,20 +17,23 @@ Our [project](https://tblondelle.github.io/DataVisualisationProject/) solves thi
 
 
 ## Problem
+Recepies are often represented with a sucessions of several steps in a cooking book. However lot of them are not linear, and require several steps to be performed simultaneously. In the case of complex recepies, this representation doesn't show which steps can be performed simultaneously. We are looking for an alternative way to represent recepies. 
+
+Recepies are not only for cooking. 
+
+## State of the art
 
 
 ## Solution
 
 
-## Data
-Formatage, source
-
-
-## State of the art
-
 ## Choice of design
 
 ## Technical choices
+
+## Data
+Formatage, source
+
 
 
 ## Description of the visualisation 
