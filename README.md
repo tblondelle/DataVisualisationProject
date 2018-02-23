@@ -48,9 +48,22 @@ The possibilities given by interactivity of the internet are not used in the vis
 
 ## Solution
 
-The idea we had is to visualise recepies like a tree. Several sub-recepies are represented as branches and then merge to create the final product. 
+The idea we had is to visualise recepies like a tree. Several sub-recepies are represented as branches and then merge to create the final product.
 
-image : 
+<table border="0">
+  <tr>
+    <td>
+      <img src="/img/structure github.JPG" style="width: 200px;">
+    </td>
+  </tr>
+  <tr>
+    <td align="center" bgcolor="EFEFEF">
+     Screenshot of the network graph of this github project. In a cooking recepie, there are no forks, only merges and commits.
+    </td>
+  </tr>
+</table>
+
+
 
 ## Choice of design
 sequentiel, pas temporel
