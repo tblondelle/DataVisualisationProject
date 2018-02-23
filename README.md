@@ -13,6 +13,29 @@ Our [project](https://tblondelle.github.io/DataVisualisationProject/) solves thi
 @456lumen, @Hugues-Moreau, @tblondelle
 
 
+## Context 
+
+
+## Problem
+
+
+## Solution
+
+
+## Data
+Formatage, source
+
+
+## State of the art
+
+## Choice of design
+
+## Technical choices
+
+
+## Description of the visualisation 
+
+## Results 
 
 ## Resources
 - [Syllabus MOS5.5 2018 (Romain Vuillemot)](https://github.com/LyonDataViz/MOS5.5-Dataviz)
