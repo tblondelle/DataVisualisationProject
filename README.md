@@ -17,11 +17,10 @@ Our [project](https://tblondelle.github.io/DataVisualisationProject/) solves thi
 
 
 ## Problem
-Recepies are often represented with a sucessions of several steps in a cooking book. However lot of them are not linear, and require several steps to be performed simultaneously. In the case of complex recepies, this representation doesn't show which steps can be performed simultaneously. We are looking for an alternative way to represent recepies. 
-
-Recepies are not only for cooking. 
+Recepies are often represented as a sucessions of several steps in a cooking book. In the case of complex recepies, this representation doesn't show which steps can be performed simultaneously. We are looking for an alternative way to represent recepies that shows clearly simultaneous tasks in order to simplify organisation. 
 
 ## State of the art
+
 
 
 ## Solution
