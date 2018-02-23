@@ -29,9 +29,6 @@ We can find recepies in cooking books or on specialised websites. The way recepi
 * Other informations
 * List of different steps to perform
 
-iamge : Mettre deux exemples : le scan d'un livre et la capture d'un site
-
-
 <table border="0">
   <tr>
     <td>
@@ -40,7 +37,7 @@ iamge : Mettre deux exemples : le scan d'un livre et la capture d'un site
   </tr>
   <tr>
     <td align="center" bgcolor="EFEFEF">
-     Screenshot of the website www.marmiton.org .
+     Screenshot of the website www.marmiton.org . We can see a list of tasks to perform that doesn't let us see that this recepie can be parralelized. 
     </td>
   </tr>
 </table>
@@ -51,7 +48,7 @@ The possibilities given by interactivity of the internet are not used in the vis
 
 ## Solution
 
-The idea we had is to visualise recepies like a tree. Several branches merge in 
+The idea we had is to visualise recepies like a tree. Several sub-recepies are represented as branches and then merge to create the final product. 
 
 image : 
 
