@@ -21,7 +21,7 @@ Recipes are often represented as a succession of several steps in a cooking book
 
 ## State of the art
 
-We can find recepies in cooking books or on specialised websites. The way recepies are represented on websites or in cooking books is similar : 
+We can find recepies in cooking books or on specialised websites. The way recipes are represented on websites or in cooking books is similar : 
 
 * List of ingredients
 * List of tools
@@ -43,12 +43,12 @@ We can find recepies in cooking books or on specialised websites. The way recepi
 </table>
 
 
-The possibilities given by interactivity of the internet are not used in the visualisation : a recepie from a website can be printed without making any difference. 
+The possibilities given by interactivity of the internet are not used in the visualisation : a recipe from a website can be printed without making any difference. 
 
 
 ## Solution
 
-The idea we had is to visualise recepies like a tree. Several sub-recepies are represented as branches and then merge to create the final product. We had the idea to use this representation, similar to github's networks graphs. 
+The idea we had is to visualise recipes like a tree. Several sub-recipes are represented as branches and then merge to create the final product. We had the idea to use this representation, similar to github's networks graphs. 
 
 <table border="0">
   <tr>
@@ -72,40 +72,17 @@ We wanted originally to represent time on the x axis. However, some actions requ
 ## Technical choices
 
 ## Data
-# Provenance des données
 
- Les données proviennent de sites de cuisine, comme http://www.marmiton.org/, ou http://www.750g.com/. Chacune d'entre elles est entrée à la main dans le fichier recettes.json, qui contiendra toutes les recettes. Nous nous sommes avant tout souciés de nous faciliter le travail une fois que nous aurons à utiliser ces données : comme nous voulons représenter les différentes suites d'étapes sous la forme d'arbres, nous avons donné, pour chaque étape, une liste des étapes requises, ainsi qu'un lieu (l'idée étant d'afficher une suites d'étapes similaires à la même hauteur). Toutes les autres informations sont directement disponibles sur les sites en question.
-Au vu de la faible quantité de données à traiter, nous ne nous sommes pas souciés des éventuelles redondances que nous pourrions introduire.
-
-Recettes : liste d'objets JSON, de la forme :
-
-			nom : string,
-	    ingrédients : list of strings, (un ingrédient n'est représenté que par une string, ex "4 oeufs")
-			tps_cuisson : int, (en minutes)
-			tps_preparation : int, (en minutes)
-			nombre_personnes: int
-			source: string (à priori, nous n'en aurons pas besoin, mais nous ne pouvons pas en être sûrs)
-			(éventuellement, autres métadonnées)
-			étapes : liste d'objets JSON, de la forme :
-
-				identifiant : int    (l'identifiant est égal à la position dans la liste)
-				descriprion_courte : string  (à afficher sur l'écran)
-				descriprion_longue : string  (à afficher sur mouseOver)
-				enfants : list of ints (les indices des enfants)
-        parent : int
-        type : "ajout"|"merge"|"decoupe"|"cuisson_plaque"|"cuisson_four"|"patienter"|"autre"
-				lieu : string (ex #: 'four','saladier_2', ...)
-
-Remarque : Il n'y a pas d'entiers à proprement parler en JSON,  "int" signifie seulement que l'on pourra directement convertir la donnée en entier depuis le Javascript.
+Our data come from cooking websites like http://www.marmiton.org/ or http://www.750g.com/. Chosen recipe are formatted in a the file recettes.json. Each recipe contains a list of steps. Each step has a number as indentifier, a location (where should it be displayed), a list of parents a list of children. Each step also a type (determines what icon will be used), a short description (always shown) and a long description (shown on mouseover). 
 
 
 ## Description of the visualisation 
 Idees ques j'ai eu mais qui vont en fait plus dans cette partie : 
-Recette en plein ecran car on ne choisit qu'une seule recette
-Pour ne pas surcharger l'ecran, on ne voit qu'un resumé de chaque étape
-Chaque etape a une icone pour etre visuelle
-  ajouter les icones
-alternance de couleurs 
+* Recette en plein ecran car on ne choisit qu'une seule recette
+* Pour ne pas surcharger l'ecran, on ne voit qu'un resumé de chaque étape
+* Chaque etape a une icone pour etre visuelle
+*   ajouter les icones
+* alternance de couleurs 
 
 <table border="0">
   <tr>
