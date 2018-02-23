@@ -31,6 +31,21 @@ We can find recepies in cooking books or on specialised websites. The way recepi
 
 iamge : Mettre deux exemples : le scan d'un livre et la capture d'un site
 
+
+<table border="0">
+  <tr>
+    <td>
+      <img src="/img/recette_brookie_marmiton.JPG" style="width: 200px;">
+    </td>
+  </tr>
+  <tr>
+    <td align="center" bgcolor="EFEFEF">
+     Screenshot of the website www.marmiton.org .
+    </td>
+  </tr>
+</table>
+
+
 The possibilities given by interactivity of the internet are not used in the visualisation : a recepie from a website can be printed without making any difference. 
 
 
