@@ -21,19 +21,46 @@ Recepies are often represented as a sucessions of several steps in a cooking boo
 
 ## State of the art
 
+We can find recepies in cooking books or on specialised websites. The way recepies are represented on websites or in cooking books is similar : 
+
+* List of ingredients
+* List of tools
+* Number of portions
+* Other informations
+* List of different steps to perform
+
+<table border="0">
+  <tr>
+    <td>
+      <img src="/img/recette_brookie_marmiton.JPG" style="width: 200px;">
+    </td>
+  </tr>
+  <tr>
+    <td align="center" bgcolor="EFEFEF">
+     Screenshot of the website www.marmiton.org . We can see a list of tasks to perform that doesn't let us see that this recepie can be parralelized. 
+    </td>
+  </tr>
+</table>
+
+
+The possibilities given by interactivity of the internet are not used in the visualisation : a recepie from a website can be printed without making any difference. 
 
 
 ## Solution
 
+The idea we had is to visualise recepies like a tree. Several sub-recepies are represented as branches and then merge to create the final product. 
+
+image : 
 
 ## Choice of design
+sequentiel, pas temporel
+reprendre les idées du 5 sheet design. 
+
 
 ## Technical choices
 
 ## Data
 Formatage, source
-
-
 
 ## Description of the visualisation 
 
