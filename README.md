@@ -1,17 +1,29 @@
 # SpeedCooking: Visualisation for Cooking
+By [@456lumen](https://github.com/456lumen), [@Hugues-Moreau](https://github.com/Hugues-Moreau) and [@tblondelle](https://github.com/tblondelle) - École Centrale de Lyon - 2018
+
+<table border="0">
+  <tr>
+    <td>
+      <img src="/img/capture d'ecran visualisation.png" style="width: 200px;">
+    </td>
+  </tr>
+  <tr>
+    <td align="center" bgcolor="EFEFEF">
+    SpeedCooking visualisation
+    </td>
+  </tr>
+</table>
 
 
-### Context 
+### Cooking with a list-style recipe: improving the representation
 Whoever having never made any mistake in the kitchen ever, please show off proudly! Cooking combines *Artistry* and *Punctiliousness*: it is the Science of *Sequences* and *Details*. But most of us simply follow the recipe to the letter, carefully written by Old Granny. And despite all the attention, patatras! the disaster has come: the yeast is forgotten!
 
 But was this recipe as carefully written as it was thought to be? Has anyone been as attentive as The Grand Paul Bocuse would have ordered?
 
-While the traditional numbered-list recipe is used by 58% of the population to prepare food[<sup>1</sup>](https://www.reportlinker.com/insight/americans-cooking-habits.html), should not some attention be paid to it? It seems indeed rather difficult to handle the representation of complex, lengthy processes, comprising several major steps in the form of a list of immutable linearity.
+While the traditional numbered-list recipe is used by 58% of the population to prepare food[<sup>1</sup>](https://www.reportlinker.com/insight/americans-cooking-habits.html), should not some attention be paid to it? It seems indeed rather difficult for a list of immutable linearity to handle complex and lengthy processes, to inform the cook of the major parts of a recipe, to represent simultaneous steps or to help organizing things in space and time.
 
-Our [project](https://tblondelle.github.io/DataVisualisationProject/), under the auspices of the Ecole Centrale de Lyon in partnership with the Institute Paul Bocuse, aims at nothing less than **reimagining the cooking recipe in a more structured, explicit and mistake-impervious way**. The solution we developped (@456lumen, @Hugues-Moreau and @tblondelle) is notably based on GitHub progress graphs and relies on the D3.js visualization technology.
+Our [project](https://tblondelle.github.io/DataVisualisationProject/), under the auspices of the Ecole Centrale de Lyon in partnership with the Institute Paul Bocuse, aims at nothing less than **reimagining the cooking recipe as a new structured, explicit and mistake-impervious way**. The solution we developped is notably based on GitHub progress graphs and relies on the D3.js visualization technology.
 
-### Problem
-Recipes are often represented as a succession of several steps in a cooking book. In the case of complex cooking recipes, this representation doesn't show which steps can be performed simultaneously. This representation also doesn't show where must be located the preparation. In order to prepare a recipe efficiently, things must be organised in space and time. We are looking for an alternative way to represent recipes that shows clearly simultaneous tasks and where does they happen as a tool to simplify organisation.
 
 ### State of the art
 
@@ -44,14 +56,14 @@ The possibilities given by interactivity of the internet are not used in the vis
 
 The idea we had is to visualise recipes like a tree. Several sub-recipes are represented as branches and then merge to create the final product. We had the idea to use this representation, similar to github's networks graphs. 
 
-<table border="0">
+<table>
   <tr>
     <td>
       <img src="/img/structure github.JPG" style="width: 200px;">
     </td>
   </tr>
   <tr>
-    <td align="center" bgcolor="EFEFEF">
+    <td>
      Screenshot of the network graph of this github project. In a cooking recepie, there are no forks, only merges and commits.
     </td>
   </tr>
@@ -85,18 +97,6 @@ Idees ques j'ai eu mais qui vont en fait plus dans cette partie :
 *   ajouter les icones
 * alternance de couleurs 
 
-<table border="0">
-  <tr>
-    <td>
-      <img src="/img/capture d'ecran visualisation.JPG" style="width: 200px;">
-    </td>
-  </tr>
-  <tr>
-    <td align="center" bgcolor="EFEFEF">
-    klsdfklqsdgfq
-    </td>
-  </tr>
-</table>
 
 
 ### Results 
