@@ -49,12 +49,40 @@
 	      </li>
 	    </ul>
 	    <form class="form-inline my-2 my-lg-0">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">Ingredients</a>
+         </li>
+        </ul>
 	      <select class="selectRecipes form-control"></select>
 	    </form>
 	  </div>
   	</nav>
 
+
   <svg></svg>
+
+
+
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">List of ingredients</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="ingredients-list">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
@@ -558,6 +586,21 @@
           selectedNode = getNextNode(selectedNode, d3.event.keyCode)
           if (selectedNode !== undefined) highlightSelectedNode(selectedNode)
         })
+
+        // ====================================
+        // =========== ingredients ============
+        // ====================================
+
+        d3.select("#ingredients-list")
+          .html(function(){
+            var string = '<ul class="list-group">'
+            for (var i = 0; i<data_recipe.ingredients.length; i++){
+              string += '<li class="list-group-item list-group-item-action">' + data_recipe.ingredients[i] + "</li>"
+            }
+            return string + "</ul>"
+          })
+
+
       }
     })
 
@@ -568,6 +611,14 @@
   </script>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+  <script>
+    $('#myModal').on('shown.bs.modal', function () {
+      $('#myInput').trigger('focus')
+    })
+  </script>
+
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
