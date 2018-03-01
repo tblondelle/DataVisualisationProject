@@ -27,7 +27,7 @@ Our [project](https://tblondelle.github.io/DataVisualisationProject/), under the
 
 ### 2. State of the art
 
-We can find recepies in cooking books or on specialised websites. The way recipes are represented on websites or in cooking books is similar : 
+We can find recepies in cooking books or on specialised websites. The way recipes are represented on websites or in cooking books is similar :
 
 * List of ingredients
 * List of tools
@@ -43,18 +43,18 @@ We can find recepies in cooking books or on specialised websites. The way recipe
   </tr>
   <tr>
     <td align="center" bgcolor="EFEFEF">
-     Screenshot of the website www.marmiton.org . We can see a list of tasks to perform that doesn't let us see that this recepie can be parralelized. 
+     Screenshot of the website www.marmiton.org . We can see a list of tasks to perform that doesn't let us see that this recepie can be parralelized.
     </td>
   </tr>
 </table>
 
 
-The possibilities given by interactivity of the internet are not used in the visualisation : a recipe from a website can be printed without making any difference. 
+The possibilities given by interactivity of the internet are not used in the visualisation : a recipe from a website can be printed without making any difference.
 
 
 ### 3. Solution
 
-The idea we had is to visualise recipes like a tree. Several sub-recipes are represented as branches and then merge to create the final product. We had the idea to use this representation, similar to github's networks graphs. 
+The idea we had is to visualise recipes like a tree. Several sub-recipes are represented as branches and then merge to create the final product. We had the idea to use this representation, similar to github's networks graphs.
 
 <table>
   <tr>
@@ -76,9 +76,9 @@ We wanted originally to represent time on the x axis. However, some actions requ
 
 
 ### 5. Technical choices
-Translating one numbered-list recipe into a complete and finalized graph as shown in this project is no easy thing. In fact, it is all about understanding the recipe structure, inferring workplace and logic chaining. Building an algorithm fed with a simple list and providing the end result is thus ruled out. (At least, for this project). We have then chosen to divide it in two separate task. 
+Translating one numbered-list recipe into a complete and finalized graph as shown in this project is no easy thing. In fact, it is all about understanding the recipe structure, inferring workplace and logic chaining. Building an algorithm fed with a simple list and providing the end result is thus ruled out. (At least, for this project). We have then chosen to divide it in two separate task.
 
-The first one is about preprocessing the recipe, formatting it in a way that an simple d3 program can understand. This task is described more thoroughly in section 6. 
+The first one is about preprocessing the recipe, formatting it in a way that an simple d3 program can understand. This task is described more thoroughly in section 6.
 
 The second task is about building the d3 program that can grab the preprocessed recipe and display it quickly and unambiguously. The details about the d3 program in charge of this can be found in the `index.html` file. Once this is done, we have added a simple web interface with the Bootstrap v4 library.
 
@@ -86,21 +86,23 @@ The second task is about building the d3 program that can grab the preprocessed 
 
 ### 6. Data
 
-Our data come from cooking websites like http://www.marmiton.org/ or http://www.750g.com/. Chosen recipe are formatted in a the file recettes.json. Each recipe contains a list of steps. Each step has a number as indentifier, a location (where should it be displayed), a list of parents a list of children. Each step also a type (determines what icon will be used), a short description (always shown) and a long description (shown on mouseover). 
+Our data come from cooking websites like http://www.marmiton.org/ or http://www.750g.com/. Chosen recipe are formatted in a the file recettes.json. Each recipe contains a list of steps. Each step has a number as indentifier, a location (where should it be displayed), a list of parents a list of children. Each step also a type (determines what icon will be used), a short description (always shown) and a long description (shown on mouseover).
 
 
-### 7. Description of the visualisation 
-Idees ques j'ai eu mais qui vont en fait plus dans cette partie : 
-* Recette en plein ecran car on ne choisit qu'une seule recette
-* Pour ne pas surcharger l'ecran, on ne voit qu'un resumé de chaque étape
-* Chaque etape a une icone pour etre visuelle
-*   ajouter les icones
-* alternance de couleurs 
+### 7. Description of the visualisation
+
+At the top of the screen is a bar with a menu allowing the user to choose the recipe to display. Upon selecting a recipe, the tree will be created with an animation that make the steps of the recipe appear in the order they should be executed.
+Each step has a defined place of execution (in the oven, in a pan, etc.), defining its position on the y axis. Dull-colored zebra stripes make the distinction between different places easier.  The steps also have a type (adding aan ingredient, waiting, generic preparation, etc.) represented by a SVG icon on the tree. A short description is provided under each icon, but as some steps require explanations which would have been too long for display, a more detailed description can be found either by pointing the mouse over an icon or by selecting the chosen step using the arrow keys. A selected icon appears slightly bigger than the others. The dependency between the different steps is represented by the links between them. The overall graph created this way is a tree, which leaves are the leftmost nodes, the steps that must be completed first; and the rightmost node is the root, a 'finished' icon.
 
 
 
-### 8. Results 
+### 8. Results
 
+This type a representation has several assets a classic, linear recipe lacks:
+- the structure of the recipe can be understood easily: How many sub-preparations (paste, icing, ...) are there ? Is the recipe complex ? How much room is required to prepare it ?
+- if several cooks are present, the work can easily be divided between each of them.
+
+However, this step-wise representation does not show the time required by each step : some may be fast (peeling or cutting a fruit, others may be longer (cooking a compote).
 
 ### 9. Resources
 - [Syllabus MOS5.5 2018 (Romain Vuillemot)](https://github.com/LyonDataViz/MOS5.5-Dataviz)
