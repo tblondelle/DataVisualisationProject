@@ -86,8 +86,7 @@ The second task is about building the d3 program that can grab the preprocessed 
 
 ### 6. Data
 
-Our data come from cooking websites like http://www.marmiton.org/ or http://www.750g.com/. Chosen recipe are formatted in a the file recettes.json. Each recipe contains a list of steps. Each step has a number as indentifier, a location (where should it be displayed), a list of parents a list of children. Each step also a type (determines what icon will be used), a short description (always shown) and a long description (shown on mouseover).
-
+Our data come from cooking websites like http://www.marmiton.org/ or http://www.750g.com/. Chosen recipe are formatted in a the file [recettes.json](https://github.com/tblondelle/DataVisualisationProject/blob/master/recettes.json) . Each recipe contains a list of steps. Each step has a number as indentifier, a location (where should it be displayed), a list of parents a list of children. Each step also a type (determines what icon will be used), a short description (always shown) and a long description (shown on mouseover).
 
 ### 7. Description of the visualisation
 
