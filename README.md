@@ -4,7 +4,7 @@ By [@456lumen](https://github.com/456lumen), [@Hugues-Moreau](https://github.com
 <table border="0">
   <tr>
     <td>
-      <a href="https://tblondelle.github.io/DataVisualisationProject/" title="See it now!"><img src="/img/capture d'ecran visualisation.png" style="width: 200px;"></a>
+      <a href="https://tblondelle.github.io/DataVisualisationProject/" title="See it now!"><img src="/img/capture d'ecran visualisation.JPG" style="width: 200px;"></a>
     </td>
   </tr>
   <tr>
