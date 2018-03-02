@@ -37,7 +37,7 @@ We can find recepies in cooking books or on specialised websites. The way recipe
 
 <table border="0">
   <tr>
-    <td>
+    <td align="center" bgcolor="EFEFEF">
       <img src="/img/recette_brookie_marmiton.JPG" style="width: 200px;">
     </td>
   </tr>
@@ -58,7 +58,7 @@ The idea we had is to visualise recipes like a tree. Several sub-recipes are rep
 
 <table>
   <tr>
-    <td>
+    <td align="center" bgcolor="EFEFEF">
       <img src="/img/structure github.JPG" style="width: 200px;">
     </td>
   </tr>
