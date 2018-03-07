@@ -1,18 +1,8 @@
 # SpeedCooking: Visualisation for Cooking
 By [@456lumen](https://github.com/456lumen), [@Hugues-Moreau](https://github.com/Hugues-Moreau) and [@tblondelle](https://github.com/tblondelle) - École Centrale de Lyon - 2018
 
-<table border="0">
-  <tr>
-    <td>
-      <a href="https://tblondelle.github.io/DataVisualisationProject/" title="See it now!"><img src="/img/capture d'ecran visualisation.JPG" style="width: 200px;"></a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" bgcolor="EFEFEF">
-    SpeedCooking visualisation
-    </td>
-  </tr>
-</table>
+
+[![Click to watch the demo](/img/thumbnail.JPG)](https://youtu.be/-qPRJQOIp3E "Click to watch the demo")
 
 
 ### 1. Cooking with a list-style recipe: improving the representation
