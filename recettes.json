@@ -1,4 +1,5 @@
 {"recettes":[
+
 	{ "nom": "Tarte aux pommes",
 	  "ingredients":
 		[ "1 pâte brisée",
@@ -170,7 +171,7 @@
 			"description_courte" : "Préchauffer le four (180°C)",
 			"description_longue" : "Préchauffer le four à 180°C (thermostat 6)",
 			"enfants" : [],
-			"parent":"7",
+			"parent":"8",
 			"type":"cuisson_four",
 			"lieu" : "four"},
 
@@ -255,7 +256,263 @@
 			"lieu" : "plan de travail 1"}
 
 		]
-	}
+	}, 
 
+	{ "nom": "Pâte à pizza",
+	  "ingredients":
+		[ "400g de farine riche en gluten",
+		  "22 cl d'eau tiède",
+		  "4g de levure de boulanger sèche ou 10g de fraîche",
+		  "2cs d'huile d'olive",
+		  "8g de sel fin"],
+	  "tps_cuisson": "15",
+	  "tps_preparation": "8h",
+	  "nombre_personnes":"2",
+	  "source":"http://www.undejeunerdesoleil.com/2012/10/la-pate-pizza-du-pizzaiolo-2-recettes-4_17.html",
+	  "etapes":
+
+	      [{"identifiant" :"0",
+			"description_courte" : "Ajouter la levure",
+			"description_longue" : "Nous allons faire un petit levain ici. Commencer par ajouter la levure.",
+			"enfants" : [],
+			"parent":"1",
+			"type":"ajout",
+			"lieu" : "petit récipient"},
+
+			{"identifiant" :"1",
+			"description_courte" : "Ajouter 100g d'eau tiède",
+			"description_longue" : "Ajouter ensuite 100g d'eau tiède",
+			"enfants" : ["0"],
+			"parent":"2",
+			"type":"ajout",
+			"lieu" : "petit récipient"},
+
+			{"identifiant" :"2",
+			"description_courte" : "Ajouter 50g de farine",
+			"description_longue" : "Ajouter ensuite 50g de farine",
+			"enfants" : ["1"],
+			"parent":"3",
+			"type":"ajout",
+			"lieu" : "petit récipient"},
+
+			{"identifiant" :"3",
+			"description_courte" : "Patienter pendant 30 minutes",
+			"description_longue" : "Il faut maintenant laisser fermenter pendant une demi-heure dans un endroit tiède. Il doit se former des bulles. On peut aussi omettre cette étape et mélanger directement la levure avec la farine mais je préfère ainsi.",
+			"enfants" : ["2"],
+			"parent":"7",
+			"type":"patienter",
+			"lieu" : "petit récipient"},
+
+
+			{"identifiant" :"4",
+			"description_courte" : "Ajouter le reste de la farine",
+			"description_longue" : "Ajouter le reste de la farine",
+			"enfants" : [],
+			"parent":"5",
+			"type":"ajout",
+			"lieu" : "saladier"},
+
+			{"identifiant" :"5",
+			"description_courte" : "Ajouter le sel",
+			"description_longue" : "Ajouter le sel",
+			"enfants" : ["4"],
+			"parent":"6",
+			"type":"ajout",
+			"lieu" : "saladier"},
+
+			{"identifiant" :"6",
+			"description_courte" : "Ajouter l'huile d'olive",
+			"description_longue" : "Ajouter l'huile d'olive",
+			"enfants" : ["5"],
+			"parent":"7",
+			"type":"ajout",
+			"lieu" : "saladier"},
+
+			{"identifiant" :"7",
+			"description_courte" : "Ajouter les deux mélanges",
+			"description_longue" : "Mélanger les deux préparations : petit levain et mélange dans le saladier.",
+			"enfants" : ["6", "3"],
+			"parent":"8",
+			"type":"merge",
+			"lieu" : "saladier"},
+
+
+			{"identifiant" :"8",
+			"description_courte" : "Ajouter petit à petit l'eau",
+			"description_longue" : "Ajouter petit à petit le reste d'eau (100-120g), si possible froide",
+			"enfants" : ["7"],
+			"parent":"9",
+			"type":"ajout",
+			"lieu" : "saladier"},
+
+
+			{"identifiant" :"9",
+			"description_courte" : "Pétrir longuement",
+			"description_longue" : "Pétrir longuement jusqu'à la pâte soit belle, lisse et très souple.",
+			"enfants" : ["8"],
+			"parent":"10",
+			"type":"autre",
+			"lieu" : "saladier"},
+
+			{"identifiant" :"10",
+			"description_courte" : "Former des boules",
+			"description_longue" : "Former une boule (ou 4 boules individuelles), les mettre dans un saladier 4 fois plus grand",
+			"enfants" : ["9"],
+			"parent":"11",
+			"type":"autre",
+			"lieu" : "saladier"},
+
+
+			{"identifiant" :"11",
+			"description_courte" : "Couvir d'un torchon humide",
+			"description_longue" : "Couvrir le saladier d’un torchon humide (à humidifier régulièrement pendant la levée)",
+			"enfants" : ["10"],
+			"parent":"12",
+			"type":"autre",
+			"lieu" : "saladier"},
+
+			{"identifiant" :"12",
+			"description_courte" : "Laisser lever au moins 6-8 heures à 20°C",
+			"description_longue" : "Laisser lever au moins 6-8 heures à 20°C, voire 15 heures à 15°C environ. La pâte doit doubler, presque tripler de volume.",
+			"enfants" : ["11"],
+			"parent":"13",
+			"type":"patienter",
+			"lieu" : "saladier"},
+
+
+
+			{"identifiant" :"13",
+			"description_courte" : "Etaler la pâte à la main",
+			"description_longue" : "Etaler la pâte à la main. Normalement, on n'a pas besoin d'utiliser de rouleau.",
+			"enfants" : ["12"],
+			"parent":"",
+			"type":"autre",
+			"lieu" : "plan de travail"}
+			
+		]
+	},
+
+	{ "nom": "Cookies façon Granola",
+	  "ingredients":
+		[ "250 g de farine complète",
+		"100 g de flocons d'avoine",
+		"150 g de beurre mou demi-sel",
+		"1 càc de poudre à lever (levure chimique)",
+		"160 g de pépites de chocolat noir",
+		"110 g de cassonade",
+		"100 g de sucre semoule",
+		"120 g de noix grossièrement concassées",
+		"2 oeufs"
+		],
+	  "tps_cuisson": "15",
+	  "tps_preparation": "25",
+	  "nombre_personnes":"2",
+	  "source":"http://vadrouillesgourmandesdenini.blogspot.fr/2014/02/cookies-facon-granola.html",
+	  "etapes":
+
+	      [{"identifiant" :"0",
+			"description_courte" : "Ajouter la farine",
+			"description_longue" : "Ajouter la farine",
+			"enfants" : [],
+			"parent":"1",
+			"type":"ajout",
+			"lieu" : "saladier"},
+
+			{"identifiant" :"1",
+			"description_courte" : "Ajouter la levure",
+			"description_longue" : "Ajouter la levure",
+			"enfants" : ["0"],
+			"parent":"2",
+			"type":"ajout",
+			"lieu" : "saladier"},
+
+			{"identifiant" :"2",
+			"description_courte" : "Ajouter les flocons d'avoine",
+			"description_longue" : "Ajouter les flocons d'avoine",
+			"enfants" : ["1"],
+			"parent":"3",
+			"type":"ajout",
+			"lieu" : "saladier"},
+
+			{"identifiant" :"3",
+			"description_courte" : "Ajouter les deux sucres",
+			"description_longue" : "Ajouter les deux sucres",
+			"enfants" : ["2"],
+			"parent":"4",
+			"type":"ajout",
+			"lieu" : "saladier"},
+
+
+			{"identifiant" :"4",
+			"description_courte" : "Ajouter les amandes concassées",
+			"description_longue" : "Ajouter les amandes concassées",
+			"enfants" : ["3"],
+			"parent":"5",
+			"type":"ajout",
+			"lieu" : "saladier"},
+
+
+			{"identifiant" :"5",
+			"description_courte" : "Ajouter le beurre mou",
+			"description_longue" : "Ajouter le beurre mou",
+			"enfants" : ["4"],
+			"parent":"6",
+			"type":"ajout",
+			"lieu" : "saladier"},
+
+			{"identifiant" :"6",
+			"description_courte" : "Ajouter les oeufs battus en omelette",
+			"description_longue" : "Ajouter les oeufs battus en omelette",
+			"enfants" : ["5"],
+			"parent":"7",
+			"type":"ajout",
+			"lieu" : "saladier"},
+
+
+			{"identifiant" :"7",
+			"description_courte" : "Ajouter les pépites de chocolat",
+			"description_longue" : "Ajouter les pépites de chocolat",
+			"enfants" : ["6"],
+			"parent":"8",
+			"type":"ajout",
+			"lieu" : "saladier"},
+
+			{"identifiant" :"8",
+			"description_courte" : "Bien malaxer",
+			"description_longue" : "Malaxer avec les mains ou une cuillère en bois.",
+			"enfants" : ["7"],
+			"parent":"10",
+			"type":"autre",
+			"lieu" : "saladier"},
+
+
+			{"identifiant" :"9",
+			"description_courte" : "Préchauffer le four à 180°C",
+			"description_longue" : "Préchauffer le four à 180°C",
+			"enfants" : [],
+			"parent":"11",
+			"type":"autre",
+			"lieu" : "four"},
+
+			{"identifiant" :"10",
+			"description_courte" : "Former les cookies",
+			"description_longue" : "Chemiser une plaque à pâtisserie de papier sulfurisé. Former des boules de tailles identiques (assez grosses comme les cookies Granola). Avec le dos d'une cuillère à café, écrasez les légèrement (elles ne vont pas s'affaisser à la cuisson, il faut donc leur donner la forme désirée dès le début !)",
+			"enfants" : ["8"],
+			"parent":"11",
+			"type":"autre",
+			"lieu" : "plan de travail"},
+
+
+			{"identifiant" :"11",
+			"description_courte" : "Enfourner 12 à 15 minutes.",
+			"description_longue" : "Enfourner 12 à 15 minutes. Les laisser refroidir sur une grille.",
+			"enfants" : ["10", "9"],
+			"parent":"",
+			"type":"cuisson",
+			"lieu" : "four"}
+
+			
+		]
+	}
 
 ]}
