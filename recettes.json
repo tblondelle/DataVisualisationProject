@@ -230,7 +230,7 @@
 			"parent":"8",
 			"type":"merge",
 			"lieu" : "plan de travail 1"},
-			
+
 			{"identifiant" :"8",
 			"description_courte" : "Cuisson 25 min, 180°C",
 			"description_longue" : "Enfourner à 180°C environ 25 min",
@@ -246,7 +246,7 @@
 			"parent":"10",
 			"type":"patienter",
 			"lieu" : "plan de travail 1"},
-			
+
 			{"identifiant" :"10",
 			"description_courte" : "Découper en cubes",
 			"description_longue" : "Couper le gateau en petits cubes",
@@ -256,7 +256,7 @@
 			"lieu" : "plan de travail 1"}
 
 		]
-	}, 
+	},
 
 	{ "nom": "Pâte à pizza",
 	  "ingredients":
@@ -388,7 +388,7 @@
 			"parent":"",
 			"type":"autre",
 			"lieu" : "plan de travail"}
-			
+
 		]
 	},
 
@@ -511,8 +511,242 @@
 			"type":"cuisson",
 			"lieu" : "four"}
 
-			
+
 		]
-	}
+	},
+
+	  	{ "nom": "Macarons",
+			  "ingredients":
+					["16 cuillères à soupe de farine",
+					"12 cuillères à soupe de sucre",
+					"6 cuillères à soupe de lait",
+					"1 oeuf",
+					"1 sachet de levure"],
+			  "tps_cuisson": "20",
+			  "tps_preparation": "20",
+			  "nombre_personnes":"6",
+			  "source":"http://www.marmiton.org/recettes/recette_macarons_18378.aspx",
+			  "etapes":[
+
+					{"identifiant" :"0",
+					"description_courte" : "Préchauffer le four (210°C)",
+					"description_longue" : "Préchauffer le four à 210°C (thermostat 7)",
+					"enfants" : [],
+					"parent":"3",
+					"type":"cuisson_four",
+					"lieu" : "four"},
+
+					{"identifiant" :"1",
+					"description_courte" : "Bien mélanger le tout",
+					"description_longue" : "Mélanger tous les ingrédients",
+					"enfants" : [],
+					"parent":"2",
+					"type":"ajout",
+					"lieu" : "plan de travail 1"},
+
+					{"identifiant" :"2",
+					"description_courte" : "Verser sur du papier sulfurisé",
+					"description_longue" : "Verser soit directement sur du papier sulfurisé, soit dans des moules à tartelettes ou une plaque à cookies",
+					"enfants" : ["1"],
+					"parent":"3",
+					"type":"ajout",
+					"lieu" : "plan de travail 1"},
+
+					{"identifiant" :"3",
+					"description_courte" : "Mettre au four",
+					"description_longue" : "Mettre au four et retirer les macarons dès qu'ils sont dorés",
+					"enfants" : ["2","0"],
+					"parent":"4",
+					"type":"cuisson_four",
+					"lieu" : "four"},
+
+					{"identifiant" :"4",
+					"description_courte" : "Laisser refroidir",
+					"description_longue" : "Laisser refroidir",
+					"enfants" : ["3"],
+					"parent":"-1",
+					"type":"patienter",
+					"lieu" : "plan de travail 1"}
+
+				]
+			},
+
+			{ "nom": "Moelleux carottes mozzarella",
+			  "ingredients":
+					["200 g de farine",
+					 "350 g de carottes",
+					 "100 g de mozzarella en billes",
+					 "60 g de beurre",
+					 "2 oeufs",
+					 "30 cl de crème",
+					 "1 sachet de levure",
+					 "Sel",
+					 "Poivre",
+					 "Graines de cumin"],
+			  "tps_cuisson": "20",
+			  "tps_preparation": "40",
+			  "nombre_personnes":"6",
+			  "source":"http://www.marmiton.org/recettes/recette_moelleux-carottes-mozzarella_349718.aspx",
+			  "etapes":[
+
+					{"identifiant" :"0",
+					"description_courte" : "Préchauffer le four (180°C)",
+					"description_longue" : "Préchauffer le four à 180°C (thermostat 6)",
+					"enfants" : [],
+					"parent":"6",
+					"type":"cuisson_four",
+					"lieu" : "four"},
+
+					{"identifiant" :"1",
+					"description_courte" : "Laver,peler, découper les carottes",
+					"description_longue" : "Laver et peler les carottes puis les couper en rondelles",
+					"enfants" : [],
+					"parent":"2",
+					"type":"ajout",
+					"lieu" : "plan de travail 1"},
+
+					{"identifiant" :"2",
+					"description_courte" : "cuire les carottes",
+					"description_longue" : "Cuire les carottes 15 min à l'eau avec les graines de cumin",
+					"enfants" : ["1"],
+					"parent":"3",
+					"type":"cuisson_plaque",
+					"lieu" : "plaque de cuisson 1"},
+
+					{"identifiant" :"3",
+					"description_courte" : "Egoutter puis écraser les carottes",
+					"description_longue" : "Egoutter puis écraser les carottes à la fourchette",
+					"enfants" : ["2"],
+					"parent":"4",
+					"type":"decoupe",
+					"lieu" : "plan de travail 1"},
+
+					{"identifiant" :"4",
+					"description_courte" : "Mélanger les ingrédients (sauf mozaerlla) avec la purée",
+					"description_longue" : "Dans un saladier, mélanger tous les ingrédients (sauf la mozaerlla) avec la purée de carotte",
+					"enfants" : ["3"],
+					"parent":"5",
+					"type":"ajout",
+					"lieu" : "plan de travail 1"},
+
+					{"identifiant" :"5",
+					"description_courte" : "Verser le mélange dans un moule avec la mozarella",
+					"description_longue" : "Remplir des moules à muffin jusqu'à la moitié puis déposer 1 à 2 billes de mozzarella ",
+					"enfants" : ["4"],
+					"parent":"6",
+					"type":"ajout",
+					"lieu" : "plan de travail 1"},
+
+					{"identifiant" :"6",
+					"description_courte" : "Cuisson 20 min, 180°C",
+					"description_longue" : "Enfourner à 180°C pendant 20 min",
+					"enfants" : ["0","5"],
+					"parent":"-1",
+					"type":"cuisson_four",
+					"lieu" : "four"}
+
+				]
+			},
+
+
+				{ "nom": "Nems au porc",
+				  "ingredients":
+						[" Pour les nems:",
+							"1 kg de porc",
+	    		 		"3 oignons",
+	    				"50 g d' ail (une tête entière)",
+	    				"2 carottes",
+	    				"200 g de champignons noirs",
+	    				"8 oeufs",
+	    				"2 cuillères à soupe de nuoc mam",
+	    				"50 g de vermicelles chinoises",
+	    				"Galette de riz carrée de 19 cm de côté",
+	    				"1/2 cuillère à café de glutamate",
+	    				"1 cuillère à café de sucre",
+	    				"1 cuillère à café rase de poivre",
+	    				"1 filet d'huile de tournesol (pour frire)",
+
+							"Pour la sauce des nems :",
+
+	    				"1 citron vert",
+	    				"35 g de sucre",
+	    				"130 g d' eau",
+	    				"28 g de nuoc mam",
+	    				"1 gousse d'ail",
+	    				"1/4 cuillère à café de purée de piment"],
+				  "tps_cuisson": "20",
+				  "tps_preparation": "45",
+				  "nombre_personnes":"8",
+				  "source":"http://www.marmiton.org/recettes/recette_nems-aux-porcs_305666.aspx",
+				  "etapes":[
+
+						{"identifiant" :"0",
+						"description_courte" : "À l'avance : Faire tremper les champignons",
+						"description_longue" : "(peut être préparée la veille) : Faire tremper les champignons dans un bol d'eau pendant une heure",
+						"enfants" : [],
+						"parent":"2",
+						"type":"decoupe",
+						"lieu" : "plan de travail 1"},
+
+						{"identifiant" :"1",
+						"description_courte" : "Mixer les légumes, la viande et les œufs",
+						"description_longue" : "Si vous n'avez pas de mixer : Râper les carottes, hacher les oignons, l'ail, les champignons hydratés et les mélanger avec la chair à saucisse et les œufs",
+						"enfants" : ["0"],
+						"parent":"3",
+						"type":"decoupe",
+						"lieu" : "plan de travail 1"},
+
+						{"identifiant" :"2",
+						"description_courte" : "Découper les vermicelles",
+						"description_longue" : "Couper les vermicelles secs en morceaux de 4 cm",
+						"enfants" : [],
+						"parent":"3",
+						"type":"decoupe",
+						"lieu" : "plan de travail 2"},
+
+						{"identifiant" :"3",
+						"description_courte" : "Ajouter les vermicelles et le reste des ingrédients",
+						"description_longue" : "Ajouter les vermicelles, le sucre, le nuoc mam, le glutamate et le poivre mélanger",
+						"enfants" : ["2","1"],
+						"parent":"4",
+						"type":"merge",
+						"lieu" : "plan de travail 1"},
+
+						{"identifiant" :"4",
+						"description_courte" : "Laisser reposer 30 min",
+						"description_longue" : "On peut laisser reposer une nuit afin de faire frire les nems à la dernière minute",
+						"enfants" : ["3"],
+						"parent":"5",
+						"type":"patienter",
+						"lieu" : "plan de travail 1"},
+
+						{"identifiant" :"5",
+						"description_courte" : "Envelopper la pâte dans des galettes humides",
+						"description_longue" : "Préparer une assiette creuse d'eau chaude, tremper une galette de riz, puis la déposer immédiatement sur un torchon. Laisser reposer. Lorsque la galette n'est pas assez reposée, celle-ci est rigide. Lorsque la galette est trop reposée, celle-ci colle. Lorsque la galette est molle mais pas collante, le roulage peut être commencé. L'eau doit être régulièrement réchauffée au micro-ondes afin qu'elle reste toujours à température élevée. Mettre une cuillère à soupe de farce sur la galette de riz au niveau du tiers inférieur en position centrale. Rabattre les 2 côtés gauche-droite de façon à ce qu'ils se touchent. Rouler en partant du bas. Presser la farce vers soi afin que le nem soit ferme. La présence d'air à l’intérieur du nem entrainera l'éclatement des nems lors de la cuisson. Il est donc important de bien serrer afin de chasser l'air, mais il ne faut pas trop serrer pour ne pas déchirer la galette",
+						"enfants" : ["4"],
+						"parent":"7",
+						"type":"decoupe",
+						"lieu" : "plan de travail 1"},
+
+						{"identifiant" :"6",
+						"description_courte" : "préparer la sauce : mélanger tous les ingrédients",
+						"description_longue" : "Mélanger tous les ingrédients jusqu'à dissolution du sucre",
+						"enfants" : [],
+						"parent":"7",
+						"type":"merge",
+						"lieu" : "plan de travail 3"},
+	
+						{"identifiant" :"7",
+						"description_courte" : "Faire frire nes nems",
+						"description_longue" : "Faire frire les nems à haute température en deux fois. Les nems sont cuits lorsqu'ils sont dorés",
+						"enfants" : ["5","6"],
+				  	"parent":"-1",
+				  	"type":"cuisson_plaque",
+						"lieu" : "plaque de cuisson 1"}
+
+
+					]
+				}
+
 
 ]}
